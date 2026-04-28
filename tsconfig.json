@@ -1,5 +1,3 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -16,6 +14,21 @@
     "paths": {
       "@app/*": [
         "./src/app/*"
+      ],
+      "@spartan-ng/helm/button": [
+        "./libs/ui/button/src/index.ts"
+      ],
+      "@civilio/sdk/api/*": [
+        "./libs/sdk/api/*"
+      ],
+      "@civilio/sdk/models": [
+        "./libs/sdk/models/index.ts"
+      ],
+      "@civilio/sdk/*": [
+        "./src/sdk/*"
+      ],
+      "@spartan-ng/helm/utils": [
+        "./libs/ui/utils/src/index.ts"
       ]
     },
     "module": "preserve"
