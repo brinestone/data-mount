@@ -5,5 +5,8 @@
  * OpenAPI spec version: 1.0.0
  */
 
+export * from './email-sign-in-request.zod';
 export * from './email-sign-up-request.zod';
+export * from './post-api-identity-sign-in-email-body.zod';
 export * from './post-api-identity-sign-up-email-body.zod';
+export * from './session-dto-of-guid.zod';

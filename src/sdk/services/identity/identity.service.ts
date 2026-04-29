@@ -24,9 +24,18 @@ import {
   Observable
 } from 'rxjs';
 
-import type {
-  EmailSignUpRequest
+import {
+  SessionDtoOfGuid
 } from '../../../../libs/sdk/models';
+import type {
+  EmailSignInRequest,
+  EmailSignUpRequest,
+  SessionDtoOfGuidOutput
+} from '../../../../libs/sdk/models';
+
+import {
+  map
+} from 'rxjs';
 
 
 
@@ -77,6 +86,43 @@ type HttpClientObserveOptions = HttpClientOptions & {
 export class IdentityService {
   private readonly http = inject(HttpClient);
 /**
+ * Sign in a user using their email credentials
+ * @summary Email sign in
+ */
+ postApiIdentitySignInEmail(emailSignInRequest: EmailSignInRequest, options?: HttpClientBodyOptions): Observable<SessionDtoOfGuidOutput>;
+ postApiIdentitySignInEmail(emailSignInRequest: EmailSignInRequest, options?: HttpClientEventOptions): Observable<HttpEvent<SessionDtoOfGuidOutput>>;
+ postApiIdentitySignInEmail(emailSignInRequest: EmailSignInRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<SessionDtoOfGuidOutput>>;
+  postApiIdentitySignInEmail(
+    emailSignInRequest: EmailSignInRequest, options?: HttpClientObserveOptions): Observable<SessionDtoOfGuidOutput | HttpEvent<SessionDtoOfGuidOutput> | AngularHttpResponse<SessionDtoOfGuidOutput>> {
+    if (options?.observe === 'events') {
+      return this.http.post<SessionDtoOfGuidOutput>(
+      `/api/identity/sign-in/email`,
+      emailSignInRequest,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'events',
+      }
+    ).pipe(map(event => event instanceof AngularHttpResponse ? event.clone({ body: SessionDtoOfGuid.parse(event.body) }) : event));
+    }
+
+    if (options?.observe === 'response') {
+      return this.http.post<SessionDtoOfGuidOutput>(
+      `/api/identity/sign-in/email`,
+      emailSignInRequest,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'response',
+      }
+    ).pipe(map(response => response.clone({ body: SessionDtoOfGuid.parse(response.body) })));
+    }
+
+    return this.http.post<SessionDtoOfGuidOutput>(
+      `/api/identity/sign-in/email`,
+      emailSignInRequest,{
+        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+      }
+    ).pipe(map(data => SessionDtoOfGuid.parse(data)));
+  }
+/**
  * Create a new user account using email
  * @summary Email sign up
  */
@@ -115,4 +161,5 @@ export class IdentityService {
   }
 };
 
+export type PostApiIdentitySignInEmailClientResult = NonNullable<SessionDtoOfGuidOutput>
 export type PostApiIdentitySignUpEmailClientResult = NonNullable<void>

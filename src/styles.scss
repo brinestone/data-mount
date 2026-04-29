@@ -20,6 +20,10 @@ body {
     sans-serif;
 }
 
+html,body{
+  @apply w-full h-full;
+}
+
 @import '@spartan-ng/brain/hlm-tailwind-preset.css';
 
 :root {
