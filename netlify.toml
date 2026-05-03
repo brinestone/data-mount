@@ -1,0 +1,3 @@
+[build]
+  command = "pnpm run build --configuration production"
+  publish = "dist/data-mount/browser"

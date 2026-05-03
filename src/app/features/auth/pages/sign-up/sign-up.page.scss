@@ -1,0 +1,5 @@
+@reference "tailwindcss";
+
+:host {
+  @apply h-full block px-3;
+}

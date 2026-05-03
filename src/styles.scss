@@ -1,4 +1,4 @@
-// @use "tailwindcss";
+@use "tailwindcss";
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
@@ -20,7 +20,8 @@ body {
     sans-serif;
 }
 
-html,body{
+html,
+body {
   @apply w-full h-full;
 }
 
@@ -101,7 +102,9 @@ html,body{
     @apply bg-background text-foreground;
   }
   button:not(:disabled),
-  [role='button']:not(:disabled) {
+  [role='button']:not(:disabled),
+  a[href],
+  a[routerlink] {
     @apply cursor-pointer;
   }
 }

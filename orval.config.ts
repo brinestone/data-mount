@@ -10,10 +10,12 @@ export default defineConfig({
 		},
 		output: {
 			mode: 'tags-split',
+			indexFiles: true,
 			target: 'src/sdk/services',
 			namingConvention: 'kebab-case',
 			client: 'angular',
 			override: {
+				// zod: {},
 				angular: {
 					provideIn: false,
 					runtimeValidation: true
