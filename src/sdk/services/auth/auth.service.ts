@@ -83,20 +83,20 @@ type HttpClientObserveOptions = HttpClientOptions & {
 
 
 @Injectable()
-export class IdentityService {
+export class AuthService {
   private readonly http = inject(HttpClient);
 /**
  * Sign in a user using their email credentials
  * @summary Email sign in
  */
- postApiIdentitySignInEmail(emailSignInRequest: EmailSignInRequest, options?: HttpClientBodyOptions): Observable<SessionDtoOfGuidOutput>;
- postApiIdentitySignInEmail(emailSignInRequest: EmailSignInRequest, options?: HttpClientEventOptions): Observable<HttpEvent<SessionDtoOfGuidOutput>>;
- postApiIdentitySignInEmail(emailSignInRequest: EmailSignInRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<SessionDtoOfGuidOutput>>;
-  postApiIdentitySignInEmail(
+ emailSignIn(emailSignInRequest: EmailSignInRequest, options?: HttpClientBodyOptions): Observable<SessionDtoOfGuidOutput>;
+ emailSignIn(emailSignInRequest: EmailSignInRequest, options?: HttpClientEventOptions): Observable<HttpEvent<SessionDtoOfGuidOutput>>;
+ emailSignIn(emailSignInRequest: EmailSignInRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<SessionDtoOfGuidOutput>>;
+  emailSignIn(
     emailSignInRequest: EmailSignInRequest, options?: HttpClientObserveOptions): Observable<SessionDtoOfGuidOutput | HttpEvent<SessionDtoOfGuidOutput> | AngularHttpResponse<SessionDtoOfGuidOutput>> {
     if (options?.observe === 'events') {
       return this.http.post<SessionDtoOfGuidOutput>(
-      `/api/identity/sign-in/email`,
+      `/api/auth/sign-in/email`,
       emailSignInRequest,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
@@ -106,7 +106,7 @@ export class IdentityService {
 
     if (options?.observe === 'response') {
       return this.http.post<SessionDtoOfGuidOutput>(
-      `/api/identity/sign-in/email`,
+      `/api/auth/sign-in/email`,
       emailSignInRequest,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
@@ -115,7 +115,7 @@ export class IdentityService {
     }
 
     return this.http.post<SessionDtoOfGuidOutput>(
-      `/api/identity/sign-in/email`,
+      `/api/auth/sign-in/email`,
       emailSignInRequest,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
@@ -126,14 +126,14 @@ export class IdentityService {
  * Create a new user account using email
  * @summary Email sign up
  */
- postApiIdentitySignUpEmail<TData = void>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientBodyOptions): Observable<TData>;
- postApiIdentitySignUpEmail<TData = void>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- postApiIdentitySignUpEmail<TData = void>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
-  postApiIdentitySignUpEmail<TData = void>(
+ emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientBodyOptions): Observable<TData>;
+ emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  emailSignUp<TData = unknown>(
     emailSignUpRequest: EmailSignUpRequest, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
     if (options?.observe === 'events') {
       return this.http.post<TData>(
-      `/api/identity/sign-up/email`,
+      `/api/auth/sign-up/email`,
       emailSignUpRequest,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
@@ -143,7 +143,7 @@ export class IdentityService {
 
     if (options?.observe === 'response') {
       return this.http.post<TData>(
-      `/api/identity/sign-up/email`,
+      `/api/auth/sign-up/email`,
       emailSignUpRequest,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
@@ -152,7 +152,7 @@ export class IdentityService {
     }
 
     return this.http.post<TData>(
-      `/api/identity/sign-up/email`,
+      `/api/auth/sign-up/email`,
       emailSignUpRequest,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
@@ -161,5 +161,3 @@ export class IdentityService {
   }
 };
 
-export type PostApiIdentitySignInEmailClientResult = NonNullable<SessionDtoOfGuidOutput>
-export type PostApiIdentitySignUpEmailClientResult = NonNullable<void>

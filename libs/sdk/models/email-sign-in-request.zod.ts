@@ -8,8 +8,8 @@ import { z as zod } from 'zod';
 
 export const emailSignInRequestStaySignedInDefault = false;
 export const EmailSignInRequest = zod.object({
-  "email": zod.string(),
-  "password": zod.string(),
+  "email": zod.string().nullish(),
+  "password": zod.string().nullish(),
   "staySignedIn": zod.boolean().default(emailSignInRequestStaySignedInDefault)
 })
 

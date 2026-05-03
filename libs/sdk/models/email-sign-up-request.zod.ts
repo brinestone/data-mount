@@ -12,9 +12,7 @@ export const emailSignUpRequestPasswordMin = 8;
 export const EmailSignUpRequest = zod.object({
   "email": zod.string(),
   "password": zod.string().min(emailSignUpRequestPasswordMin),
-  "confirmPassword": zod.string().nullable(),
-  "firstName": zod.string().nullish(),
-  "lastName": zod.string()
+  "confirmPassword": zod.string().nullable()
 })
 
 export type EmailSignUpRequest = zod.input<typeof EmailSignUpRequest>;
