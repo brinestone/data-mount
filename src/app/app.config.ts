@@ -3,11 +3,13 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { apiInterceptor } from './interceptors/api-interceptor';
+import { provideNetlifyLoader } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideBrowserGlobalErrorListeners(),
 		provideRouter(appRoutes, withViewTransitions({ skipInitialTransition: true })),
-		provideHttpClient(withInterceptors([apiInterceptor]))
+		provideHttpClient(withInterceptors([apiInterceptor])),
+		provideNetlifyLoader()
 	]
 };

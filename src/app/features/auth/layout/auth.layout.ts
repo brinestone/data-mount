@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
 import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
-
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
 	selector: 'dm-auth-layout',
@@ -10,6 +10,7 @@ import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
 	imports: [
 		RouterLinkActive,
 		RouterLink,
+		NgOptimizedImage,
 		RouterOutlet,
 		NgxFlickeringGridComponent
 	],
