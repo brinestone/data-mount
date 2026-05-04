@@ -6,14 +6,21 @@ export type Strict<T> = {
 	: NonNullable<T[P]>;
 };
 
-export type EmailSignUpValidationErrors = {
+export type RemoteValidationErrors<T> = {
 	type?: string;
 	title: string;
 	status: number;
-	errors: {
-		Email?: string[];
-		Password?: string[];
-		ConfirmPassword?: string[];
-	};
 	traceId?: string;
+	errors: T;
 }
+
+export type EmailSignUpValidationErrors = RemoteValidationErrors<{
+	Email?: string[];
+	Password?: string[];
+	ConfirmPassword?: string[];
+}>;
+
+export type EmailSignInValidationErrors = RemoteValidationErrors<{
+	Email?: string[];
+	Password?: string[];
+}>;

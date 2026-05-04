@@ -119,4 +119,3 @@ export class HealthService {
   }
 };
 
-export type CheckHealthClientResult = NonNullable<AnonymousTypeOfbooleanOutput>

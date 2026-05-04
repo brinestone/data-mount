@@ -37,7 +37,6 @@ import { HlmInputGroup, HlmInputGroupAddon, HlmInputGroupButton, HlmInputGroupIn
 			[class.ng-dirty]="dirty()"
 			(blur)="onBlur()"
 			(input)="value.set($event.target.value)"
-			class="pl-1!"
 			hlmInputGroupInput
 			#input
 		/>
