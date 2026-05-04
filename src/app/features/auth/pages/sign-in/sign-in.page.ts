@@ -99,7 +99,7 @@ export class SignInPage {
 	});
 
 	protected readonly authMethods: { icon: string, label: string, handler: () => void }[] = [
-		{ label: 'Google', icon: 'lobeGoogleColor', handler: this.googleSignInHandler.bind(this) }
+		// { label: 'Google', icon: 'lobeGoogleColor', handler: this.googleSignInHandler.bind(this) }
 	];
 
 	private googleSignInHandler() {
