@@ -2,7 +2,7 @@
   @if (formModel().errors().length > 0) {
   <div hlmAlert variant="destructive">
     <ng-icon name="lucideAlertCircle" />
-    <h4 hlmAlertTitle>Errors</h4>
+    <h4 hlmAlertTitle>{{errorTitle()}}</h4>
     <ul>
       @for (error of formModel().errors(); track $index) {
       <li hlmAlertDescription>{{ error.message }}</li>
@@ -39,6 +39,7 @@
       <hlm-checkbox id="field-preview-billing-address" [formField]="formModel.staySignedIn" />
       <label hlmFieldLabel for="field-preview-billing-address">Stay signed in</label>
     </div>
+    @if(authMethods.length > 0) {
     <hlm-field-separator />
     <p class="text-center text-xs" hlmFieldDescription>Or</p>
     <div hlmField>
@@ -49,6 +50,7 @@
       </button>
       }
     </div>
+    }
   </fieldset>
 </form>
 

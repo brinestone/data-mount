@@ -56,10 +56,12 @@ export class SignInPage {
 	private readonly route = inject(ActivatedRoute);
 	private readonly authService = inject(AuthService);
 
+	protected readonly errorTitle = signal('');
 	protected readonly formData = signal(defaultSignInData());
 	protected readonly formModel = form(this.formData, loginFormSchema, {
 		submission: {
 			action: async (field) => {
+				this.errorTitle.set('');
 				try {
 					const session = await lastValueFrom(this.authService.emailSignIn({
 						email: field.email().value(),
@@ -75,16 +77,17 @@ export class SignInPage {
 					const result: ValidationError.WithFieldTree[] = [];
 					if (e instanceof HttpErrorResponse) {
 						const isValidationError = e.status == 400;
+						this.errorTitle.set(e.error?.title ?? 'An error occurred');
 						if (isValidationError) {
 							const { errors: { Email, Password } } = e.error as EmailSignInValidationErrors;
 							Email?.forEach(message => result.push({ kind: 'validationError', fieldTree: field.email, message }));
 							Password?.forEach(message => result.push({ kind: 'validationError', fieldTree: field.password, message }));
 						} else if (e.status < 500) {
-							return { kind: 'validationError', message: e.error?.message ?? e.message, fieldTree: field };
+							return { kind: 'validationError', message: e.error?.detail ?? e.error?.message ?? e.message, fieldTree: field };
 						} else if (e.status == 0) {
 							return { kind: 'serverError', message: 'Could not reach the server', fieldTree: field };
 						} else {
-							return { kind: 'serverError', message: e.error?.title ?? e.message };
+							return { kind: 'serverError', message: e.error?.title ?? e.error?.message ?? e.message };
 						}
 					} else {
 						return { kind: 'serverError', message: (e as Error)?.message ?? 'An unexpected error occurred', fieldTree: field };

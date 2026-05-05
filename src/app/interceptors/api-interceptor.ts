@@ -1,9 +1,12 @@
 import { HttpErrorResponse, HttpInterceptorFn } from "@angular/common/http";
 import { catchError, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
+import { inject } from "@angular/core";
+import { Router } from "@angular/router";
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 	if (req.url.startsWith("/api")) {
+		const router = inject(Router);
 		const newUrl = new URL(req.urlWithParams, environment.apiBase);
 		const clonedRequest = req.clone({
 			setHeaders: {
@@ -15,7 +18,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 				if (e.status == 401) {
 					localStorage.clear();
 					sessionStorage.clear();
-					location.href = '://';
+					router.navigate([], { onSameUrlNavigation: 'reload' })
 				}
 				return throwError(() => e);
 			})

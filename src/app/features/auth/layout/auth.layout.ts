@@ -34,8 +34,8 @@ export class AuthLayout {
 		{ label: 'Sign in', path: 'signin' },
 	];
 	protected readonly footLinks: PageLink[] = [
-		// { path: '/about', label: 'About' },
-		// { path: '/legal', label: 'Legal' },
+		{ path: '/about', label: 'About' },
+		{ path: '/legal', label: 'Legal' },
 	];
 	protected readonly usePlaceholders = !isDevMode();
 }

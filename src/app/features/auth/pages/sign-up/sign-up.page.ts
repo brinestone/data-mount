@@ -75,7 +75,7 @@ export class SignUpPage {
 						} else if (e.status == 0) {
 							return { kind: 'serverError', message: 'Could not reach the server', fieldTree: field };
 						} else {
-							return { kind: 'serverError', message: e.error?.title ?? e.message };
+							return { kind: 'serverError', message: e.error?.title ?? e.error?.message ?? e.message };
 						}
 					} else {
 						return { kind: 'serverError', message: (e as Error)?.message ?? 'An unexpected error occurred', fieldTree: field };
