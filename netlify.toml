@@ -2,7 +2,46 @@
   command = "pnpm run build --configuration production"
   publish = "dist/data-mount/browser"
 
+# 1. German preference
+[[redirects]]
+  from = "/"
+  to = "/de/"
+  status = 302
+  conditions = {Language = ["de"]}
+
+# 2. French preference
+[[redirects]]
+  from = "/"
+  to = "/fr/"
+  status = 302
+  conditions = {Language = ["fr"]}
+
+# 3. Default Fallback (English)
+# If the browser doesn't match 'de' or 'fr', it falls through to this.
+[[redirects]]
+  from = "/"
+  to = "/en/"
+  status = 302
+
+# --- SPA Routing for deep links ---
+
+[[redirects]]
+  from = "/en/*"
+  to = "/en/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/de/*"
+  to = "/de/index.html"
+  status = 200
+
+# Final catch-all to prevent 404s on the root level
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/en/index.html"
   status = 200
