@@ -19,7 +19,7 @@
     <div hlmField>
       <div class="flex justify-between items-center">
         <label hlmFieldLabel for="password">Password <span class="text-red-500">*</span></label>
-        <a hlmBtn variant="link" routerLink="../reset-password" [queryParams]="{
+        <a hlmBtn variant="link" routerLink="../reset-password" [relativeTo]="route" [queryParams]="{
           forgot: true
         }">Forgot password</a>
       </div>

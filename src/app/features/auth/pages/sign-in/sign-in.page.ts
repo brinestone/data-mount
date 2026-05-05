@@ -53,9 +53,9 @@ import { defaultSignInData, loginFormSchema } from "./form-config";
 })
 export class SignInPage {
 	private readonly router = inject(Router);
-	private readonly route = inject(ActivatedRoute);
 	private readonly authService = inject(AuthService);
 
+	protected readonly route = inject(ActivatedRoute);
 	protected readonly errorTitle = signal('');
 	protected readonly formData = signal(defaultSignInData());
 	protected readonly formModel = form(this.formData, loginFormSchema, {
