@@ -3,7 +3,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import { form, FormField, FormRoot, ValidationError } from "@angular/forms/signals";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { EmailSignUpValidationErrors } from "@app/types";
+import { EmailSignUpValidationErrors, RemoteValidationErrors } from "@app/types";
 import { AuthService } from "@civilio/sdk/services/auth/auth.service";
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lobeGoogleColor } from '@ng-icons/lobe-icons/color';
@@ -75,7 +75,7 @@ export class SignUpPage {
 						} else if (e.status == 0) {
 							return { kind: 'serverError', message: 'Could not reach the server', fieldTree: field };
 						} else {
-							return { kind: 'serverError', message: e.error?.title ?? e.message };
+							return { kind: 'serverError', message: e.error?.title ?? e.error?.message ?? e.message };
 						}
 					} else {
 						return { kind: 'serverError', message: (e as Error)?.message ?? 'An unexpected error occurred', fieldTree: field };
@@ -88,12 +88,8 @@ export class SignUpPage {
 			}
 		}
 	});
-	protected readonly links: { path: string, label: string }[] = [
-		// { path: '/about', label: 'About' },
-		// { path: '/legal', label: 'Legal' },
-	];
 	protected readonly authMethods: { icon: string, label: string, handler: () => void }[] = [
-		{ label: 'Google', icon: 'lobeGoogleColor', handler: this.googleSignInHandler.bind(this) }
+		// { label: 'Google', icon: 'lobeGoogleColor', handler: this.googleSignInHandler.bind(this) }
 	];
 
 	private googleSignInHandler() {

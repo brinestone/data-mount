@@ -7,8 +7,16 @@
 
 export * from './anonymous-type-ofboolean.zod';
 export * from './email-sign-in-body.zod';
+export * from './email-sign-in-headers.zod';
+export * from './email-sign-in-params.zod';
 export * from './email-sign-in-request.zod';
 export * from './email-sign-up-body.zod';
+export * from './email-sign-up-headers.zod';
+export * from './email-sign-up-params.zod';
 export * from './email-sign-up-request.zod';
-export * from './problem-details.zod';
+export * from './error-message-payload.zod';
+export * from './get-antiforgery-token-headers.zod';
+export * from './get-antiforgery-token-params.zod';
 export * from './session-dto-of-guid.zod';
+export * from './sign-out-headers.zod';
+export * from './sign-out-params.zod';

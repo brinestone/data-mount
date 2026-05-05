@@ -28,9 +28,13 @@ import {
   SessionDtoOfGuid
 } from '../../../../libs/sdk/models';
 import type {
+  EmailSignInParams,
   EmailSignInRequest,
+  EmailSignUpParams,
   EmailSignUpRequest,
-  SessionDtoOfGuidOutput
+  GetAntiforgeryTokenParams,
+  SessionDtoOfGuidOutput,
+  SignOutParams
 } from '../../../../libs/sdk/models';
 
 import {
@@ -76,7 +80,54 @@ type HttpClientObserveOptions = HttpClientOptions & {
   readonly observe?: 'body' | 'events' | 'response';
 };
 
+type AngularHttpParamValue = string | number | boolean | Array<string | number | boolean>;
+type AngularHttpParamValueWithNullable = AngularHttpParamValue | null;
 
+function filterParams(
+  params: Record<string, unknown>,
+  requiredNullableKeys?: ReadonlySet<string>,
+  preserveRequiredNullables?: false,
+): Record<string, AngularHttpParamValue>;
+function filterParams(
+  params: Record<string, unknown>,
+  requiredNullableKeys: ReadonlySet<string> | undefined,
+  preserveRequiredNullables: true,
+): Record<string, AngularHttpParamValueWithNullable>;
+function filterParams(
+  params: Record<string, unknown>,
+  requiredNullableKeys: ReadonlySet<string> = new Set(),
+  preserveRequiredNullables = false,
+): Record<string, AngularHttpParamValueWithNullable> {
+  const filteredParams: Record<string, AngularHttpParamValueWithNullable> = {};
+  for (const [key, value] of Object.entries(params)) {
+    if (Array.isArray(value)) {
+      const filtered = value.filter(
+        (item) =>
+          item != null &&
+          (typeof item === 'string' ||
+            typeof item === 'number' ||
+            typeof item === 'boolean'),
+      ) as Array<string | number | boolean>;
+      if (filtered.length) {
+        filteredParams[key] = filtered;
+      }
+    } else if (
+      preserveRequiredNullables &&
+      value === null &&
+      requiredNullableKeys.has(key)
+    ) {
+      filteredParams[key] = null;
+    } else if (
+      value != null &&
+      (typeof value === 'string' ||
+        typeof value === 'number' ||
+        typeof value === 'boolean')
+    ) {
+      filteredParams[key] = value;
+    }
+  }
+  return filteredParams;
+}
 
 
 
@@ -86,21 +137,98 @@ type HttpClientObserveOptions = HttpClientOptions & {
 export class AuthService {
   private readonly http = inject(HttpClient);
 /**
+ * @summary Sign out
+ */
+ signOut<TData = void>(params?: SignOutParams, options?: HttpClientBodyOptions): Observable<TData>;
+ signOut<TData = void>(params?: SignOutParams, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ signOut<TData = void>(params?: SignOutParams, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  signOut<TData = void>(
+    params?: SignOutParams, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    const filteredParams = filterParams({...params, ...options?.params}, new Set<string>([]));
+
+    if (options?.observe === 'events') {
+      return this.http.post<TData>(
+      `/api/auth/sign-out`,undefined,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'events',
+        params: filteredParams,}
+    );
+    }
+
+    if (options?.observe === 'response') {
+      return this.http.post<TData>(
+      `/api/auth/sign-out`,undefined,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'response',
+        params: filteredParams,}
+    );
+    }
+
+    return this.http.post<TData>(
+      `/api/auth/sign-out`,undefined,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+        params: filteredParams,}
+    );
+  }
+/**
+ * Generate a new anti-forgery token for the current session
+ * @summary Obtain antiforgery token
+ */
+ getAntiforgeryToken<TData = void>(params?: GetAntiforgeryTokenParams, options?: HttpClientBodyOptions): Observable<TData>;
+ getAntiforgeryToken<TData = void>(params?: GetAntiforgeryTokenParams, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ getAntiforgeryToken<TData = void>(params?: GetAntiforgeryTokenParams, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+  getAntiforgeryToken<TData = void>(
+    params?: GetAntiforgeryTokenParams, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    const filteredParams = filterParams({...params, ...options?.params}, new Set<string>([]));
+
+    if (options?.observe === 'events') {
+      return this.http.get<TData>(
+      `/api/auth/aif-token`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'events',
+        params: filteredParams,}
+    );
+    }
+
+    if (options?.observe === 'response') {
+      return this.http.get<TData>(
+      `/api/auth/aif-token`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'response',
+        params: filteredParams,}
+    );
+    }
+
+    return this.http.get<TData>(
+      `/api/auth/aif-token`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+        params: filteredParams,}
+    );
+  }
+/**
  * Sign in a user using their email credentials
  * @summary Email sign in
  */
- emailSignIn(emailSignInRequest: EmailSignInRequest, options?: HttpClientBodyOptions): Observable<SessionDtoOfGuidOutput>;
- emailSignIn(emailSignInRequest: EmailSignInRequest, options?: HttpClientEventOptions): Observable<HttpEvent<SessionDtoOfGuidOutput>>;
- emailSignIn(emailSignInRequest: EmailSignInRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<SessionDtoOfGuidOutput>>;
+ emailSignIn(emailSignInRequest: EmailSignInRequest,
+    params?: EmailSignInParams, options?: HttpClientBodyOptions): Observable<SessionDtoOfGuidOutput>;
+ emailSignIn(emailSignInRequest: EmailSignInRequest,
+    params?: EmailSignInParams, options?: HttpClientEventOptions): Observable<HttpEvent<SessionDtoOfGuidOutput>>;
+ emailSignIn(emailSignInRequest: EmailSignInRequest,
+    params?: EmailSignInParams, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<SessionDtoOfGuidOutput>>;
   emailSignIn(
-    emailSignInRequest: EmailSignInRequest, options?: HttpClientObserveOptions): Observable<SessionDtoOfGuidOutput | HttpEvent<SessionDtoOfGuidOutput> | AngularHttpResponse<SessionDtoOfGuidOutput>> {
+    emailSignInRequest: EmailSignInRequest,
+    params?: EmailSignInParams, options?: HttpClientObserveOptions): Observable<SessionDtoOfGuidOutput | HttpEvent<SessionDtoOfGuidOutput> | AngularHttpResponse<SessionDtoOfGuidOutput>> {
+    const filteredParams = filterParams({...params, ...options?.params}, new Set<string>([]));
+
     if (options?.observe === 'events') {
       return this.http.post<SessionDtoOfGuidOutput>(
       `/api/auth/sign-in/email`,
       emailSignInRequest,{
-        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      }
+        params: filteredParams,}
     ).pipe(map(event => event instanceof AngularHttpResponse ? event.clone({ body: SessionDtoOfGuid.parse(event.body) }) : event));
     }
 
@@ -108,36 +236,42 @@ export class AuthService {
       return this.http.post<SessionDtoOfGuidOutput>(
       `/api/auth/sign-in/email`,
       emailSignInRequest,{
-        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      }
+        params: filteredParams,}
     ).pipe(map(response => response.clone({ body: SessionDtoOfGuid.parse(response.body) })));
     }
 
     return this.http.post<SessionDtoOfGuidOutput>(
       `/api/auth/sign-in/email`,
       emailSignInRequest,{
-        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
-      }
+        params: filteredParams,}
     ).pipe(map(data => SessionDtoOfGuid.parse(data)));
   }
 /**
  * Create a new user account using email
  * @summary Email sign up
  */
- emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientBodyOptions): Observable<TData>;
- emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
- emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
+ emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest,
+    params?: EmailSignUpParams, options?: HttpClientBodyOptions): Observable<TData>;
+ emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest,
+    params?: EmailSignUpParams, options?: HttpClientEventOptions): Observable<HttpEvent<TData>>;
+ emailSignUp<TData = unknown>(emailSignUpRequest: EmailSignUpRequest,
+    params?: EmailSignUpParams, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<TData>>;
   emailSignUp<TData = unknown>(
-    emailSignUpRequest: EmailSignUpRequest, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    emailSignUpRequest: EmailSignUpRequest,
+    params?: EmailSignUpParams, options?: HttpClientObserveOptions): Observable<TData | HttpEvent<TData> | AngularHttpResponse<TData>> {
+    const filteredParams = filterParams({...params, ...options?.params}, new Set<string>([]));
+
     if (options?.observe === 'events') {
       return this.http.post<TData>(
       `/api/auth/sign-up/email`,
       emailSignUpRequest,{
-        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
-      }
+        params: filteredParams,}
     );
     }
 
@@ -145,19 +279,23 @@ export class AuthService {
       return this.http.post<TData>(
       `/api/auth/sign-up/email`,
       emailSignUpRequest,{
-        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
-      }
+        params: filteredParams,}
     );
     }
 
     return this.http.post<TData>(
       `/api/auth/sign-up/email`,
       emailSignUpRequest,{
-        ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
-      }
+        params: filteredParams,}
     );
   }
 };
 
+export type SignOutClientResult = NonNullable<void>
+export type GetAntiforgeryTokenClientResult = NonNullable<void>
+export type EmailSignInClientResult = NonNullable<SessionDtoOfGuidOutput>
+export type EmailSignUpClientResult = NonNullable<unknown>

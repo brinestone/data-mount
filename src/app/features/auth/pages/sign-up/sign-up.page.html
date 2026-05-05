@@ -1,74 +1,52 @@
 <form [formRoot]="formModel" class="py-3 space-y-3">
   @if (formModel().errors().length > 0) {
-    <div hlmAlert variant="destructive">
-      <ng-icon name="lucideAlertCircle" />
-      <h4 hlmAlertTitle>Errors</h4>
-      <ul>
-        @for (error of formModel().errors(); track $index) {
-          <li hlmAlertDescription>{{ error.message }}</li>
-        }
-      </ul>
-    </div>
+  <div hlmAlert variant="destructive">
+    <ng-icon name="lucideAlertCircle" />
+    <h4 hlmAlertTitle>Errors</h4>
+    <ul>
+      @for (error of formModel().errors(); track $index) {
+      <li hlmAlertDescription>{{ error.message }}</li>
+      }
+    </ul>
+  </div>
   }
   <fieldset hlmFieldSet>
     <div hlmField>
       <label hlmFieldLabel for="email">Email <span class="text-red-500">*</span></label>
       <input id="lastName" hlmInput [formField]="formModel.email" />
-      <ng-container
-        [ngTemplateOutlet]="errors"
-        [ngTemplateOutletContext]="{ $implicit: formModel.email }"
-      />
+      <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.email }" />
     </div>
     <div hlmField>
       <label hlmFieldLabel for="password">Password <span class="text-red-500">*</span></label>
-      <dm-password-input
-        id="password"
-        [formField]="formModel.password"
-        autocomplete="new-password"
-      />
-      <ng-container
-        [ngTemplateOutlet]="errors"
-        [ngTemplateOutletContext]="{ $implicit: formModel.password }"
-      />
+      <dm-password-input id="password" [formField]="formModel.password" autocomplete="new-password" />
+      <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.password }" />
     </div>
     <div hlmField>
-      <label hlmFieldLabel for="confirmPassword"
-        >Confirm Password <span class="text-red-500">*</span></label
-      >
-      <dm-password-input
-        id="confirmPassword"
-        [formField]="formModel.confirmPassword"
-        autocomplete="new-password"
-      />
-      <ng-container
-        [ngTemplateOutlet]="errors"
-        [ngTemplateOutletContext]="{ $implicit: formModel.confirmPassword }"
-      />
+      <label hlmFieldLabel for="confirmPassword">Confirm Password <span class="text-red-500">*</span></label>
+      <dm-password-input id="confirmPassword" [formField]="formModel.confirmPassword" autocomplete="new-password" />
+      <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.confirmPassword }" />
     </div>
     <div hlmField>
-      <button
-        type="submit"
-        hlmBtn
-        class="flex w-full"
-        [disabled]="formModel().submitting() || formModel().invalid()"
-      >
+      <button type="submit" hlmBtn class="flex w-full" [disabled]="formModel().submitting() || formModel().invalid()">
         @if (formModel().submitting()) {
-          <hlm-spinner icon="lucideLoader" />
+        <hlm-spinner icon="lucideLoader" />
         } @else {
-          <span>Sign up</span>
+        <span>Sign up</span>
         }
       </button>
     </div>
+    @if(authMethods.length > 0){
     <hlm-field-separator />
     <p class="text-center text-xs" hlmFieldDescription>Or</p>
     <div hlmField>
       @for (method of authMethods; track $index) {
-        <button type="button" variant="outline" hlmBtn class="w-full" (click)="method.handler()">
-          <ng-icon [name]="method.icon" />
-          <span>Continue with {{ method.label }}</span>
-        </button>
+      <button type="button" variant="outline" hlmBtn class="w-full" (click)="method.handler()">
+        <ng-icon [name]="method.icon" />
+        <span>Continue with {{ method.label }}</span>
+      </button>
       }
     </div>
+    }
     <hlm-field-separator />
     <div hlmField>
       <p hlmFieldDescription class="items-center flex gap-x-1 flex-wrap">
@@ -78,25 +56,17 @@
         .
       </p>
     </div>
-    <div class="text-xs flex items-center gap-x-2 flex-wrap gap-y-1">
-      @for (link of links; track $index) {
-        <a [routerLink]="link.path" class="text-muted-foreground font-semibold">{{ link.label }}</a>
-        @if (!$last) {
-          <ng-icon name="lucideDot" />
-        }
-      }
-    </div>
   </fieldset>
 </form>
 
 <ng-template #errors let-control>
   @if (control().pending()) {
-    <div class="flex items-center gap-x-2 text-sm text-sky-400">
-      <hlm-spinner /> <span>Checking...</span>
-    </div>
+  <div class="flex items-center gap-x-2 text-sm text-sky-400">
+    <hlm-spinner /> <span>Checking...</span>
+  </div>
   } @else if (control().invalid() && control().touched()) {
-    @for (error of control().errors(); track error) {
-      <hlm-field-error [validator]="error.kind">{{ error.message }}</hlm-field-error>
-    }
+  @for (error of control().errors(); track error) {
+  <hlm-field-error [validator]="error.kind">{{ error.message }}</hlm-field-error>
+  }
   }
 </ng-template>
