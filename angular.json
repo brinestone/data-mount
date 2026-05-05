@@ -8,6 +8,9 @@
   "projects": {
     "data-mount": {
       "projectType": "application",
+      "i18n": {
+        "sourceLocale": "en-US"
+      },
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss",
@@ -51,7 +54,8 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/tailwind.css", "src/styles.scss"]
+            "styles": ["src/tailwind.css", "src/styles.scss"],
+            "polyfills": ["@angular/localize/init"]
           },
           "configurations": {
             "production": {
