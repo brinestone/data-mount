@@ -17,6 +17,7 @@ import { HlmInput } from "@spartan-ng/helm/input";
 import { HlmSpinner } from "@spartan-ng/helm/spinner";
 import { lastValueFrom } from "rxjs";
 import { defaultSignInData, loginFormSchema } from "./form-config";
+import { messages } from "@app/messages";
 
 @Component({
 	selector: 'dm-sign-in-page',
@@ -77,7 +78,7 @@ export class SignInPage {
 					const result: ValidationError.WithFieldTree[] = [];
 					if (e instanceof HttpErrorResponse) {
 						const isValidationError = e.status == 400;
-						this.errorTitle.set(e.error?.title ?? 'An error occurred');
+						this.errorTitle.set(e.error?.title ?? messages.unknownError);
 						if (isValidationError) {
 							const { errors: { Email, Password } } = e.error as EmailSignInValidationErrors;
 							Email?.forEach(message => result.push({ kind: 'validationError', fieldTree: field.email, message }));
@@ -85,12 +86,12 @@ export class SignInPage {
 						} else if (e.status < 500) {
 							return { kind: 'validationError', message: e.error?.detail ?? e.error?.message ?? e.message, fieldTree: field };
 						} else if (e.status == 0) {
-							return { kind: 'serverError', message: 'Could not reach the server', fieldTree: field };
+							return { kind: 'serverError', message: messages.serverUnreachable, fieldTree: field };
 						} else {
-							return { kind: 'serverError', message: e.error?.title ?? e.error?.message ?? e.message };
+							return { kind: 'serverError', message: e.error?.detail ?? e.error?.message ?? e.message };
 						}
 					} else {
-						return { kind: 'serverError', message: (e as Error)?.message ?? 'An unexpected error occurred', fieldTree: field };
+						return { kind: 'serverError', message: (e as Error)?.message ?? messages.unknownError, fieldTree: field };
 					}
 					return result;
 				}

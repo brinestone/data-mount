@@ -2,7 +2,7 @@
   @if (formModel().errors().length > 0) {
   <div hlmAlert variant="destructive">
     <ng-icon name="lucideAlertCircle" />
-    <h4 hlmAlertTitle>Errors</h4>
+    <h4 hlmAlertTitle>{{errorTitle()}}</h4>
     <ul>
       @for (error of formModel().errors(); track $index) {
       <li hlmAlertDescription>{{ error.message }}</li>
@@ -12,17 +12,17 @@
   }
   <fieldset hlmFieldSet>
     <div hlmField>
-      <label hlmFieldLabel for="email">Email <span class="text-red-500">*</span></label>
+      <label hlmFieldLabel for="email"><span i18n>Email</span> <span class="text-red-500">*</span></label>
       <input id="lastName" hlmInput [formField]="formModel.email" />
       <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.email }" />
     </div>
     <div hlmField>
-      <label hlmFieldLabel for="password">Password <span class="text-red-500">*</span></label>
+      <label hlmFieldLabel for="password"><span i18n>Password</span> <span class="text-red-500">*</span></label>
       <dm-password-input id="password" [formField]="formModel.password" autocomplete="new-password" />
       <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.password }" />
     </div>
     <div hlmField>
-      <label hlmFieldLabel for="confirmPassword">Confirm Password <span class="text-red-500">*</span></label>
+      <label hlmFieldLabel for="confirmPassword"><span i18n>Confirm Password</span> <span class="text-red-500">*</span></label>
       <dm-password-input id="confirmPassword" [formField]="formModel.confirmPassword" autocomplete="new-password" />
       <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.confirmPassword }" />
     </div>
@@ -31,7 +31,7 @@
         @if (formModel().submitting()) {
         <hlm-spinner icon="lucideLoader" />
         } @else {
-        <span>Sign up</span>
+        <span i18n>Sign up</span>
         }
       </button>
     </div>
@@ -42,7 +42,7 @@
       @for (method of authMethods; track $index) {
       <button type="button" variant="outline" hlmBtn class="w-full" (click)="method.handler()">
         <ng-icon [name]="method.icon" />
-        <span>Continue with {{ method.label }}</span>
+        <span i18n>Continue with {{ method.label }}</span>
       </button>
       }
     </div>
@@ -51,8 +51,8 @@
     <div hlmField>
       <p hlmFieldDescription class="items-center flex gap-x-1 flex-wrap">
         <ng-icon name="lucideAlertCircle" />
-        <span>By signing up, you are agreeing with our</span>
-        <a routerLink="/terms-and-conditions">Terms &amp; conditions </a>
+        <span i18n>By signing up, you are agreeing with our</span>
+        <a routerLink="/terms-and-conditions" i18n>Terms &amp; conditions </a>
         .
       </p>
     </div>
@@ -62,7 +62,7 @@
 <ng-template #errors let-control>
   @if (control().pending()) {
   <div class="flex items-center gap-x-2 text-sm text-sky-400">
-    <hlm-spinner /> <span>Checking...</span>
+    <hlm-spinner /> <span i18n>Checking...</span>
   </div>
   } @else if (control().invalid() && control().touched()) {
   @for (error of control().errors(); track error) {

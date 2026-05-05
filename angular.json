@@ -9,7 +9,10 @@
     "data-mount": {
       "projectType": "application",
       "i18n": {
-        "sourceLocale": "en-US"
+        "sourceLocale": "en",
+        "locales": {
+          "fr": "src/locales/messages.fr.xlf"
+        }
       },
       "schematics": {
         "@schematics/angular:component": {
@@ -54,8 +57,13 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/tailwind.css", "src/styles.scss"],
-            "polyfills": ["@angular/localize/init"]
+            "styles": [
+              "src/tailwind.css",
+              "src/styles.scss"
+            ],
+            "polyfills": [
+              "@angular/localize/init"
+            ]
           },
           "configurations": {
             "production": {
