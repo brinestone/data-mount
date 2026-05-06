@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, isDevMode } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
-import { NgOptimizedImage } from '@angular/common';
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lucideDot } from "@ng-icons/lucide";
+import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
 
 type PageLink = {
 	path: string, label: string
@@ -16,7 +15,7 @@ type PageLink = {
 	imports: [
 		RouterLinkActive,
 		RouterLink,
-		NgOptimizedImage,
+		// NgOptimizedImage,
 		RouterOutlet,
 		NgxFlickeringGridComponent,
 		NgIcon
@@ -30,12 +29,12 @@ type PageLink = {
 })
 export class AuthLayout {
 	protected links: PageLink[] = [
-		{ label: 'Sign up', path: 'signup' },
-		{ label: 'Sign in', path: 'signin' },
+		{ label: $localize`Sign up`, path: 'signup' },
+		{ label: $localize`Sign in`, path: 'signin' },
 	];
 	protected readonly footLinks: PageLink[] = [
-		{ path: '/about', label: 'About' },
-		{ path: '/legal', label: 'Legal' },
+		{ path: '/about', label: $localize`:about page|The about page for the website@@site_about:About` },
+		{ path: '/legal', label: $localize`:legal page|The legal page for the website@@site_legal:Legal` },
 	];
 	protected readonly usePlaceholders = !isDevMode();
 }

@@ -12,14 +12,16 @@
   }
   <fieldset hlmFieldSet>
     <div hlmField>
-      <label hlmFieldLabel for="email">Email <span class="text-red-500">*</span></label>
+      <label hlmFieldLabel for="email"><span i18n="email field label">Email</span> <span
+          class="text-red-500">*</span></label>
       <input autocomplete="username" id="lastName" hlmInput [formField]="formModel.email" />
       <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.email }" />
     </div>
     <div hlmField>
       <div class="flex justify-between items-center">
-        <label hlmFieldLabel for="password">Password <span class="text-red-500">*</span></label>
-        <a hlmBtn variant="link" routerLink="../reset-password" [queryParams]="{
+        <label hlmFieldLabel for="password"><span i18n="password field label">Password</span> <span
+            class="text-red-500">*</span></label>
+        <a hlmBtn variant="link" routerLink="../reset-password" [relativeTo]="route" [queryParams]="{
           forgot: true
         }">Forgot password</a>
       </div>
@@ -37,7 +39,7 @@
     </div>
     <div hlmField orientation="horizontal">
       <hlm-checkbox id="field-preview-billing-address" [formField]="formModel.staySignedIn" />
-      <label hlmFieldLabel for="field-preview-billing-address">Stay signed in</label>
+      <label hlmFieldLabel for="field-preview-billing-address" i18n>Stay signed in</label>
     </div>
     @if(authMethods.length > 0) {
     <hlm-field-separator />
@@ -46,7 +48,7 @@
       @for (method of authMethods; track $index) {
       <button type="button" variant="outline" hlmBtn class="w-full" (click)="method.handler()">
         <ng-icon [name]="method.icon" />
-        <span>Continue with {{ method.label }}</span>
+        <span i18n>Continue with {{ method.label }}</span>
       </button>
       }
     </div>
@@ -57,7 +59,7 @@
 <ng-template #errors let-control>
   @if (control().pending()) {
   <div class="flex items-center gap-x-2 text-sm text-sky-400">
-    <hlm-spinner /> <span>Checking...</span>
+    <hlm-spinner /> <span i18n>Checking...</span>
   </div>
   } @else if (control().invalid() && control().touched()) {
   @for (error of control().errors(); track error) {

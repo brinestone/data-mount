@@ -1,17 +1,16 @@
-import { provideNetlifyLoader } from '@angular/common';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { ApplicationConfig, isDevMode, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter, withViewTransitions } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { apiInterceptor } from './interceptors/api-interceptor';
 
-const loaders = !isDevMode() ? provideNetlifyLoader() : [];
+// const loaders = !isDevMode() ? provideNetlifyLoader() : [];
 
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideBrowserGlobalErrorListeners(),
 		provideRouter(appRoutes, withViewTransitions({ skipInitialTransition: true })),
 		provideHttpClient(withInterceptors([apiInterceptor])),
-		loaders
+		// loaders
 	]
 };

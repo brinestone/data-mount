@@ -17,6 +17,7 @@ import { HlmSpinner } from '@spartan-ng/helm/spinner';
 import { lastValueFrom } from "rxjs";
 import { configureSignUpForm, defaultSignUpFormData } from "./form-config";
 import { PasswordInput } from "@app/components";
+import { messages } from "@app/messages";
 
 @Component({
 	selector: 'dm-sign-up-page',
@@ -55,30 +56,33 @@ export class SignUpPage {
 	private readonly route = inject(ActivatedRoute);
 	private readonly authService = inject(AuthService);
 
+	protected readonly errorTitle = signal('');
 	protected readonly formData = signal(defaultSignUpFormData());
 	protected readonly formModel = form(this.formData, configureSignUpForm, {
 		submission: {
 			action: async (field) => {
+				this.errorTitle.set('');
 				try {
 					await lastValueFrom(this.authService.emailSignUp(field().value()));
 				} catch (e) {
 					const result: ValidationError.WithFieldTree[] = [];
 					if (e instanceof HttpErrorResponse) {
 						const isValidationError = e.status == 400;
+						this.errorTitle.set(e.error?.title ?? messages.unknownError);
 						if (isValidationError) {
 							const { errors: { ConfirmPassword, Email, Password } } = e.error as EmailSignUpValidationErrors;
 							ConfirmPassword?.forEach(message => result.push({ kind: 'validationError', fieldTree: field.confirmPassword, message }));
 							Email?.forEach(message => result.push({ kind: 'validationError', fieldTree: field.email, message }));
 							Password?.forEach(message => result.push({ kind: 'validationError', fieldTree: field.password, message }));
 						} else if (e.status < 500) {
-							return { kind: 'validationError', message: e.error?.message ?? e.message, fieldTree: field };
+							return { kind: 'validationError', message: e.error?.detail ?? e.error?.message ?? e.message, fieldTree: field };
 						} else if (e.status == 0) {
-							return { kind: 'serverError', message: 'Could not reach the server', fieldTree: field };
+							return { kind: 'serverError', message: messages.serverUnreachable, fieldTree: field };
 						} else {
-							return { kind: 'serverError', message: e.error?.title ?? e.error?.message ?? e.message };
+							return { kind: 'serverError', message: e.error?.detail ?? e.error?.message ?? e.message };
 						}
 					} else {
-						return { kind: 'serverError', message: (e as Error)?.message ?? 'An unexpected error occurred', fieldTree: field };
+						return { kind: 'serverError', message: (e as Error)?.message ?? messages.unknownError, fieldTree: field };
 					}
 					return result;
 				}

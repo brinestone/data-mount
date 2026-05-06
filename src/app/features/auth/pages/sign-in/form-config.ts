@@ -1,4 +1,5 @@
 import { email, required, schema } from "@angular/forms/signals";
+import { messages } from "@app/messages";
 import { Strict } from "@app/types";
 import { EmailSignInRequest } from "@civilio/sdk/models";
 
@@ -11,8 +12,8 @@ export function defaultSignInData() {
 }
 
 export const loginFormSchema = schema<Strict<EmailSignInRequest>>(paths => {
-	required(paths.email, { message: 'This field is required' });
-	email(paths.email, { message: 'Invalid email address' });
+	required(paths.email, { message: messages.requiredField });
+	email(paths.email, { message: messages.invalidEmail });
 
-	required(paths.password, { message: 'This field is required' });
+	required(paths.password, { message: messages.requiredField });
 })
