@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, isDevMode } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
-import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
-import { NgOptimizedImage } from '@angular/common';
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lucideDot } from "@ng-icons/lucide";
+import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
 
 type PageLink = {
 	path: string, label: string
@@ -16,7 +15,7 @@ type PageLink = {
 	imports: [
 		RouterLinkActive,
 		RouterLink,
-		NgOptimizedImage,
+		// NgOptimizedImage,
 		RouterOutlet,
 		NgxFlickeringGridComponent,
 		NgIcon
