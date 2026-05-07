@@ -2,6 +2,12 @@
   command = "pnpm run build --configuration production"
   publish = "dist/data-mount/browser"
 
+[context.production]
+  command = "pnpm run build --configuration production"
+
+[context.deploy-preview]
+  command = "pnpm run build --configuration staging"
+
 # 1. German preference
 [[redirects]]
   from = "/"
