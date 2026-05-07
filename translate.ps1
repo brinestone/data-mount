@@ -1,4 +1,4 @@
-$locales = "fr";
+$locales = @("fr");
 $localesDir = Join-Path "src" "locales";
 
 Write-Host "Extracting i18n messages";
