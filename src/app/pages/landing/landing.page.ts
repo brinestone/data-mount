@@ -12,7 +12,8 @@ import { HlmButton } from '@spartan-ng/helm/button';
 		RouterLink,
 		HlmButton,
 		NgxFlickeringGridComponent,
-		NgxGradientTextComponent
+		NgxGradientTextComponent,
+		HlmButton,
 	],
 	templateUrl: './landing.page.html',
 	styleUrl: './landing.page.scss',
