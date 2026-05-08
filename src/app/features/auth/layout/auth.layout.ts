@@ -34,8 +34,8 @@ export class AuthLayout {
 	];
 	protected readonly footLinks: PageLink[] = [
 		{ path: '/', label: $localize`:landing page:Home` },
-		{ path: '/about', label: $localize`:about page|The about page for the website@@site_about:About` },
-		{ path: '/legal', label: $localize`:legal page|The legal page for the website@@site_legal:Legal` },
+		{ path: '/about', label: $localize`:about page|The about page for the website:About` },
+		{ path: '/legal', label: $localize`:legal page|The legal page for the website:Legal` },
 	];
 	protected readonly usePlaceholders = !isDevMode();
 }

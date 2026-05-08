@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
-      <trans-unit id="login_page_title" datatype="html">
+      <trans-unit id="4231407248968078600" datatype="html">
         <source>Sign into Your account</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/auth.routes.ts</context>
@@ -11,7 +11,7 @@
         <note priority="1" from="description">The title of the login page</note>
         <note priority="1" from="meaning">login page title</note>
       </trans-unit>
-      <trans-unit id="signup_page_title" datatype="html">
+      <trans-unit id="7467639562536668254" datatype="html">
         <source>Register your account Today!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/auth.routes.ts</context>
@@ -24,21 +24,33 @@
         <source>Sign up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">32</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-up/sign-up.page.html</context>
           <context context-type="linenumber">34,35</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">11,12</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5207635742003539443" datatype="html">
         <source>Sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">34</context>
+          <context context-type="linenumber">33</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="site_about" datatype="html">
+      <trans-unit id="2821179408673282599" datatype="html">
+        <source>Home</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <note priority="1" from="description">landing page</note>
+      </trans-unit>
+      <trans-unit id="1111438507317738681" datatype="html">
         <source>About</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
@@ -47,7 +59,7 @@
         <note priority="1" from="description">The about page for the website</note>
         <note priority="1" from="meaning">about page</note>
       </trans-unit>
-      <trans-unit id="site_legal" datatype="html">
+      <trans-unit id="2176123050815968647" datatype="html">
         <source>Legal</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
@@ -79,6 +91,13 @@
           <context context-type="linenumber">20</context>
         </context-group>
         <note priority="1" from="description">password field label</note>
+      </trans-unit>
+      <trans-unit id="8264044238565501678" datatype="html">
+        <source>Forgot password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
+          <context context-type="linenumber">26,27</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="6023420556639522969" datatype="html">
         <source>Stay signed in</source>
@@ -130,7 +149,7 @@
           <context context-type="linenumber">55,56</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="required_msg" datatype="html">
+      <trans-unit id="1766868512644833211" datatype="html">
         <source>This field is required</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/messages.ts</context>
@@ -139,7 +158,7 @@
         <note priority="1" from="description">Validation error message for a required field</note>
         <note priority="1" from="meaning">required field message</note>
       </trans-unit>
-      <trans-unit id="invalid_email" datatype="html">
+      <trans-unit id="8331077356219939846" datatype="html">
         <source>Invalid email address</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/messages.ts</context>
@@ -178,6 +197,35 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/messages.ts</context>
           <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7037786720902995678" datatype="html">
+        <source>Next-gen real-time data insights</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <note priority="1" from="description">site title</note>
+      </trans-unit>
+      <trans-unit id="2573443270155118858" datatype="html">
+        <source>Manage your data in real-time from a single place, and view insights across your data with AI</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">21,23</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2045779543869682721" datatype="html">
+        <source>Get Started</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">26,27</context>
         </context-group>
       </trans-unit>
     </body>

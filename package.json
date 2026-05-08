@@ -7,7 +7,8 @@
     "build": "ng build --localize",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "sdk:update": "pnpm orval --clean"
+    "sdk:update": "pnpm orval --clean",
+    "prepare": "husky"
   },
   "private": true,
   "packageManager": "pnpm@10.33.0",
