@@ -248,7 +248,8 @@
           <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
           <context context-type="linenumber">26,27</context>
         </context-group>
-      <target>Commencer</target></trans-unit>
+        <target>Commencer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
