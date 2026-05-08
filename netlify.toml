@@ -1,47 +1,58 @@
 [build]
-  command = "pnpm run build --configuration production"
-  publish = "dist/data-mount/browser"
+command = "pnpm run build --configuration production"
+publish = "dist/data-mount/browser"
+
+[context.production]
+command = "pnpm run build --configuration production"
+
+[context.deploy-preview]
+command = "pnpm run build --configuration staging"
+
+[[redirects]]
+from = "/img/*"
+to = "/:language/img/:splat"
+status = 200
 
 # 1. German preference
 [[redirects]]
-  from = "/"
-  to = "/de/"
-  status = 302
-  conditions = {Language = ["de"]}
+from = "/"
+to = "/de/"
+status = 302
+conditions = { Language = ["de"] }
 
 # 2. French preference
 [[redirects]]
-  from = "/"
-  to = "/fr/"
-  status = 302
-  conditions = {Language = ["fr"]}
+from = "/"
+to = "/fr/"
+status = 302
+conditions = { Language = ["fr"] }
 
 # 3. Default Fallback (English)
 # If the browser doesn't match 'de' or 'fr', it falls through to this.
 [[redirects]]
-  from = "/"
-  to = "/en/"
-  status = 302
+from = "/"
+to = "/en/"
+status = 302
 
 # --- SPA Routing for deep links ---
 
 [[redirects]]
-  from = "/en/*"
-  to = "/en/index.html"
-  status = 200
+from = "/en/*"
+to = "/en/index.html"
+status = 200
 
 [[redirects]]
-  from = "/fr/*"
-  to = "/fr/index.html"
-  status = 200
+from = "/fr/*"
+to = "/fr/index.html"
+status = 200
 
 [[redirects]]
-  from = "/de/*"
-  to = "/de/index.html"
-  status = 200
+from = "/de/*"
+to = "/de/index.html"
+status = 200
 
 # Final catch-all to prevent 404s on the root level
 [[redirects]]
-  from = "/*"
-  to = "/en/index.html"
-  status = 200
+from = "/*"
+to = "/en/index.html"
+status = 200

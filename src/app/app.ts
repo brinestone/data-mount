@@ -1,34 +1,35 @@
 import { Component, DOCUMENT, effect, Inject, inject, Renderer2 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterOutlet } from '@angular/router';
-import { fromEvent, map } from 'rxjs';
-
-const watcher = matchMedia('prefers-dark-mode');
-function currentTheme(src: { matches: boolean }) {
-	return src.matches ? 'dark' : 'light';
-}
+import { ThemeService } from './features/themeing/theme.service';
+import { Meta } from '@angular/platform-browser';
 @Component({
 	selector: 'dm-root',
 	imports: [RouterOutlet],
-	templateUrl: './app.html',
+	template: `<router-outlet/>`,
 	styleUrl: './app.scss'
 })
 export class App {
-	protected readonly theme = toSignal(
-		fromEvent<MediaQueryListEvent>(watcher, 'change').pipe(
-			map(currentTheme)
-		),
-		{ initialValue: currentTheme(watcher) }
-	);
-	// protected readonly renderer = inject(Renderer2);
-	constructor(@Inject(DOCUMENT) document: Document, renderer: Renderer2) {
+	protected readonly theme = inject(ThemeService).themeSignal;
+	constructor(@Inject(DOCUMENT) private readonly document: Document,
+		renderer: Renderer2, private readonly meta: Meta) {
 		effect(() => {
 			const theme = this.theme();
 			if (theme == 'dark') {
-				renderer.addClass(document.children[0], 'dark');
+				renderer.addClass(document.documentElement, 'dark');
 			} else {
-				renderer.removeClass(document.children[0], 'dark');
+				renderer.removeClass(document.documentElement, 'dark');
 			}
-		})
+			this.updateThemeColor();
+		});
+		this.updateThemeColor();
+	}
+
+	private updateThemeColor() {
+		const styles = getComputedStyle(this.document.documentElement);
+		const colorValue = styles.getPropertyValue('--primary').trim();
+
+		if (colorValue) {
+			this.meta.updateTag({ name: 'theme-color', content: colorValue });
+		}
 	}
 }
