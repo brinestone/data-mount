@@ -23,7 +23,7 @@
             class="text-red-500">*</span></label>
         <a hlmBtn variant="link" routerLink="../reset-password" [relativeTo]="route" [queryParams]="{
           forgot: true
-        }">Forgot password</a>
+        }" i18n>Forgot password</a>
       </div>
       <dm-password-input id="password" [formField]="formModel.password" autocomplete="current-password" />
       <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.password }" />

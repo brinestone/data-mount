@@ -1,4 +1,4 @@
-@use "tailwindcss";
+@use 'tailwindcss';
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/preflight.css' layer(base);
@@ -106,5 +106,20 @@ body {
   a[href],
   a[routerlink] {
     @apply cursor-pointer;
+  }
+}
+
+html {
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--background);
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: var(--primary);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-(--primary) dark:bg-(--primary-foreground);
   }
 }

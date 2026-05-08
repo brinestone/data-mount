@@ -38,7 +38,16 @@ importers:
       '@ng-icons/lucide':
         specifier: '>=32.0.0 <34.0.0'
         version: 33.2.2
+      '@ngxs/store':
+        specifier: ^21.0.0
+        version: 21.0.0(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2)
       '@omnedia/ngx-flickering-grid':
+        specifier: ^4.0.1
+        version: 4.0.1(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))
+      '@omnedia/ngx-gradient-text':
+        specifier: ^4.0.1
+        version: 4.0.1(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))
+      '@omnedia/ngx-vortex':
         specifier: ^4.0.1
         version: 4.0.1(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))
       '@spartan-ng/brain':
@@ -1915,6 +1924,12 @@ packages:
   '@ng-icons/lucide@33.2.2':
     resolution: {integrity: sha512-/jse2Z6fnk4WbW3HDH+jSfE/ihBskVr+RHltk5KfxohgQRhqqQ2FOxTP0IhU3xYV1pMwpziH3WpIR+gKkGcryg==}
 
+  '@ngxs/store@21.0.0':
+    resolution: {integrity: sha512-zp8BgLNhdj8yDiBQpjjLhHaCv7vGdyCYzG2myj6j/A5XcUv71ikuJZfY7Z9rAibBah2mQCaerdQ3fOA9qG70HA==}
+    peerDependencies:
+      '@angular/core': '>=21.0.0 <22.0.0'
+      rxjs: '>=7.0.0'
+
   '@noble/hashes@1.4.0':
     resolution: {integrity: sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==}
     engines: {node: '>= 16'}
@@ -2105,6 +2120,18 @@ packages:
 
   '@omnedia/ngx-flickering-grid@4.0.1':
     resolution: {integrity: sha512-5Iyd3LQIsPV4wPAg6+qnIJWVMYC93Hy7R3aBicOgI1e0ofEG57t+7T4Eud6wYva6eLok85nI806C8b2Zf1dV0g==}
+    peerDependencies:
+      '@angular/common': ^21.0.0
+      '@angular/core': ^21.0.0
+
+  '@omnedia/ngx-gradient-text@4.0.1':
+    resolution: {integrity: sha512-2Yr4o6IdWbjHS+ojmwhTQRy1Qu1mDWK0fCA7pqVczzHe2OZdRCTIMpZqmi+ekQASy5i+Wh7XmdsczrBl5XKVMA==}
+    peerDependencies:
+      '@angular/common': ^21.0.0
+      '@angular/core': ^21.0.0
+
+  '@omnedia/ngx-vortex@4.0.1':
+    resolution: {integrity: sha512-NiVfyQESi+yhiTb9ZAZNaOzBbskxHAwwP2Atb2W6FCvkaZkcvbukjlRcIo3JUYBksZx//6pwLVLMu8woGcfVJA==}
     peerDependencies:
       '@angular/common': ^21.0.0
       '@angular/core': ^21.0.0
@@ -8720,6 +8747,12 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
+  '@ngxs/store@21.0.0(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2)':
+    dependencies:
+      '@angular/core': 21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)
+      rxjs: 7.8.2
+      tslib: 2.8.1
+
   '@noble/hashes@1.4.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -9153,6 +9186,18 @@ snapshots:
       - debug
 
   '@omnedia/ngx-flickering-grid@4.0.1(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))':
+    dependencies:
+      '@angular/common': 21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)
+      tslib: 2.8.1
+
+  '@omnedia/ngx-gradient-text@4.0.1(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))':
+    dependencies:
+      '@angular/common': 21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2)
+      '@angular/core': 21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)
+      tslib: 2.8.1
+
+  '@omnedia/ngx-vortex@4.0.1(@angular/common@21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))':
     dependencies:
       '@angular/common': 21.2.10(@angular/core@21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2))(rxjs@7.8.2)
       '@angular/core': 21.2.10(@angular/compiler@21.2.10)(rxjs@7.8.2)

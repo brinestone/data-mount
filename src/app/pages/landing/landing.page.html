@@ -1,1 +1,26 @@
-<p>landing works!</p>
+<om-flickering-grid [squareSize]="80">
+  <div class="p-1 scroll-fade">
+    <nav class="container mx-auto flex items-center justify-between">
+      <a routerLink="/">
+        <img src="/img/datamount_{{theme()}}_sm_square_no_bg.png" width="100">
+      </a>
+      <div class="flex items-center gap-3">
+        @if(signedIn) {
+        <a hlmBtn size="lg" routerLink="/dashboard" i18n>Dashboard</a>
+        }@else {
+        <a hlmBtn size="lg" routerLink="/auth/signup" routerLink="/auth/signin">Sign up</a>
+        }
+      </div>
+    </nav>
+  </div>
+  <div class="flex items-center justify-center h-screen relative">
+    <div class="space-y-4">
+      <om-gradient-text class="flex justify-center"
+        styleClass="hero-text text-center text-[5rem] font-extrabold text-foreground" i18n-text="site title"
+        text="Seamless and Secure data" />
+      <p class="text-center text-3xl" i18n>Manage your data from a single place, and view insights across your datasets
+        wih
+        AI</p>
+    </div>
+  </div>
+</om-flickering-grid>
