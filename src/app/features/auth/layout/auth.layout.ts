@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, isDevMode } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject, isDevMode } from "@angular/core";
 import { RouterLink, RouterLinkActive, RouterOutlet } from "@angular/router";
+import { ThemeService } from "@app/features/themeing/theme.service";
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lucideDot } from "@ng-icons/lucide";
 import { NgxFlickeringGridComponent } from '@omnedia/ngx-flickering-grid';
@@ -37,5 +38,5 @@ export class AuthLayout {
 		{ path: '/about', label: $localize`:about page|The about page for the website:About` },
 		{ path: '/legal', label: $localize`:legal page|The legal page for the website:Legal` },
 	];
-	protected readonly usePlaceholders = !isDevMode();
+	protected readonly theme = inject(ThemeService).themeSignal;
 }
