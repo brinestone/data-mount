@@ -1,9 +1,9 @@
 <div
-  class="grid grid-rows-[auto_1fr] shadow-lg rounded-lg relative z-20 bg-white/50 dark:bg-black/10 backdrop-blur lg:w-[25vw] w-[80vw] max-w-[90vw] border border-muted">
+  class="grid grid-rows-[auto_1fr] shadow-lg rounded-lg relative z-20 bg-white/50 dark:bg-black/10 backdrop-blur lg:w-[25vw] w-[80vw] max-w-[90vw] border border-muted"
+>
   <div class="px-3 py-6 grid grid-cols-[auto_1fr] items-start gap-x-3">
-    <div class="rounded-md bg-black flex items-center justify-center">
-      <img src="/img/datamount_{{theme()}}_sm_square_no_bg.png"
-        width="50" height="42" />
+    <div class="rounded-md flex items-center justify-center">
+      <img src="/img/datamount_{{theme()}}_sm_square_no_bg.png" width="50" height="42" />
     </div>
     <div class="space-y-3">
       <div class="space-y-1">
@@ -12,22 +12,31 @@
       </div>
       <div class="flex flex-wrap gap-x-2 gap-y-1">
         @for (link of links; track $index) {
-        <a routerLinkActive="current" [routerLink]="link.path" class="link-item" queryParamsHandling="preserve">{{
-          link.label }}</a>
+        <a
+          routerLinkActive="current"
+          [routerLink]="link.path"
+          class="link-item"
+          queryParamsHandling="preserve"
+          >{{ link.label }}</a
+        >
         }
       </div>
     </div>
   </div>
   <div>
     <router-outlet />
-    <div class="text-xs flex items-center gap-x-2 flex-wrap gap-y-1 mt-3 justify-center lg:justify-start">
+    <div
+      class="text-xs flex items-center gap-x-2 flex-wrap gap-y-1 mt-3 justify-center lg:justify-start"
+    >
       @for (link of footLinks; track $index) {
       <a [routerLink]="link.path" class="text-muted-foreground font-semibold">{{ link.label }}</a>
       @if (!$last) {
       <ng-icon name="lucideDot" />
-      }
-      }
+      } }
     </div>
   </div>
 </div>
-<om-flickering-grid [squareSize]="400" class="z-10 w-full h-full absolute top-0 left-0 pointer-events-none" />
+<om-flickering-grid
+  [squareSize]="80"
+  class="z-10 w-full h-full absolute top-0 left-0 pointer-events-none"
+/>

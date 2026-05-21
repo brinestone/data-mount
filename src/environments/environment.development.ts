@@ -1,4 +1,5 @@
 export const environment = {
-	apiBase: 'http://localhost:5144/api',
-	targetVersion: '1.0'
+  apiBase: 'http://localhost:5144/api',
+  targetVersion: '1.0',
+  sessionIdKey: 'session-id',
 } as const;

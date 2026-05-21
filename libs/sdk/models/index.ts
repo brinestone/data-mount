@@ -5,7 +5,7 @@
  * OpenAPI spec version: 1.0.0
  */
 
-export * from './anonymous-type-ofboolean.zod';
+export * from './contact-dto-of-guid.zod';
 export * from './email-sign-in-body.zod';
 export * from './email-sign-in-headers.zod';
 export * from './email-sign-in-params.zod';
@@ -17,6 +17,10 @@ export * from './email-sign-up-request.zod';
 export * from './error-message-payload.zod';
 export * from './get-antiforgery-token-headers.zod';
 export * from './get-antiforgery-token-params.zod';
+export * from './get-me-headers.zod';
+export * from './get-me-params.zod';
+export * from './health-response-dto.zod';
 export * from './session-dto-of-guid.zod';
 export * from './sign-out-headers.zod';
 export * from './sign-out-params.zod';
+export * from './user-dto-of-guid.zod';

@@ -95,7 +95,7 @@ export class SignInPage {
 					}
 					return result;
 				}
-				const redirect = decodeURIComponent(this.route.snapshot.queryParams['continue'] ?? '%252F');
+				const redirect = decodeURIComponent(this.route.snapshot.queryParams['continue'] ?? '/');
 				this.router.navigate([redirect],);
 				return null;
 			}

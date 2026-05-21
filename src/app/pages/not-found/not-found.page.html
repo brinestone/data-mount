@@ -1,1 +1,23 @@
-<p>not-found works!</p>
+<div class="max-w-[90%]">
+  <hlm-empty>
+    <hlm-empty-header>
+      <div hlmEmptyMedia variant="icon">
+        <ng-icon name="lucideUnlink" />
+      </div>
+      <p hlmEmptyTitle i18n>Not Found</p>
+      <p hlmEmptyDescription i18n>The page you are looking for has been moved or does not exist.</p>
+    </hlm-empty-header>
+    <div hlmEmptyContent>
+      <div class="flex items-center justify-evenly gap-3">
+        <button (click)="location.back()" type="button" hlmBtn variant="outline">
+          <ng-icon name="lucideArrowLeft" />
+          <span i18n>Go back</span>
+        </button>
+        <a hlmBtn routerLink="/">
+          <ng-icon name="lucideHome" />
+          <span i18n>Home</span>
+        </a>
+      </div>
+    </div>
+  </hlm-empty>
+</div>
