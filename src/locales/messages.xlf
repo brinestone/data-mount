@@ -2,6 +2,17 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/app.routes.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="4231407248968078600" datatype="html">
         <source>Sign into Your account</source>
         <context-group purpose="location">
@@ -24,7 +35,7 @@
         <source>Sign up</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="linenumber">33</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-up/sign-up.page.html</context>
@@ -39,14 +50,14 @@
         <source>Sign in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">33</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2821179408673282599" datatype="html">
         <source>Home</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">36</context>
+          <context context-type="linenumber">37</context>
         </context-group>
         <note priority="1" from="description">landing page</note>
       </trans-unit>
@@ -54,7 +65,7 @@
         <source>About</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">37</context>
+          <context context-type="linenumber">38</context>
         </context-group>
         <note priority="1" from="description">The about page for the website</note>
         <note priority="1" from="meaning">about page</note>
@@ -63,7 +74,7 @@
         <source>Legal</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
-          <context context-type="linenumber">38</context>
+          <context context-type="linenumber">39</context>
         </context-group>
         <note priority="1" from="description">The legal page for the website</note>
         <note priority="1" from="meaning">legal page</note>
@@ -149,6 +160,20 @@
           <context context-type="linenumber">55,56</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="4930506384627295710" datatype="html">
+        <source>Settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2949848596707725099" datatype="html">
+        <source>Sign out</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="1766868512644833211" datatype="html">
         <source>This field is required</source>
         <context-group purpose="location">
@@ -197,13 +222,6 @@
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/messages.ts</context>
           <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6570363013146073520" datatype="html">
-        <source>Dashboard</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
-          <context context-type="linenumber">9,10</context>
         </context-group>
       </trans-unit>
       <trans-unit id="7037786720902995678" datatype="html">

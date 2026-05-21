@@ -1,0 +1,47 @@
+<div hlmSidebarWrapper>
+  <hlm-sidebar>
+    <div hlmSidebarHeader>
+      <dm-banner />
+    </div>
+    <div hlmSidebarContent></div>
+    <div hlmSidebarFooter>
+      <ul hlmSidebarMenu>
+        <li hlmSidebarMenuItem>
+          <button class="py-2" hlmSidebarMenuButton [hlmDropdownMenuTrigger]="menu">
+            <div class="flex items-center gap-2 py-2">
+              <hlm-avatar size="sm">
+                <img
+                  hlmAvatarImage
+                  [src]="principal().photo"
+                  alt="User photo"
+                  i18n-alt="profile photo|User's profile photo"
+                />
+                <span hlmAvatarFallback>{{ principal().initials }}</span>
+              </hlm-avatar>
+              <span class="line-clamp-1 block">{{ principal().fullName }}</span>
+            </div>
+            <ng-icon name="lucideChevronUp" class="ml-auto" />
+          </button>
+          <ng-template #menu>
+            <hlm-dropdown-menu class="w-60">
+              <a routerLink="/settings" hlmDropdownMenuItem>
+                <ng-icon name="lucideSettings" />
+                <span i18n>Settings</span>
+              </a>
+              <button (click)="onSignOutButtonClicked()" variant="destructive" hlmDropdownMenuItem>
+                <ng-icon name="lucideLogOut" />
+                <span i18n>Sign out</span>
+              </button>
+            </hlm-dropdown-menu>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+  </hlm-sidebar>
+  <main hlmSidebarInset class="overflow-auto relative">
+    <header class="p-2 flex items-center gap-3">
+      <button type="button" hlmSidebarTrigger></button>
+    </header>
+    <router-outlet />
+  </main>
+</div>

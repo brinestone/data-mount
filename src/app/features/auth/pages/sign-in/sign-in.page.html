@@ -12,24 +12,50 @@
   }
   <fieldset hlmFieldSet>
     <div hlmField>
-      <label hlmFieldLabel for="email"><span i18n="email field label">Email</span> <span
-          class="text-red-500">*</span></label>
+      <label hlmFieldLabel for="email"
+        ><span i18n="email field label">Email</span> <span class="text-red-500">*</span></label
+      >
       <input autocomplete="username" id="lastName" hlmInput [formField]="formModel.email" />
-      <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.email }" />
+      <ng-container
+        [ngTemplateOutlet]="errors"
+        [ngTemplateOutletContext]="{ $implicit: formModel.email }"
+      />
     </div>
     <div hlmField>
       <div class="flex justify-between items-center">
-        <label hlmFieldLabel for="password"><span i18n="password field label">Password</span> <span
-            class="text-red-500">*</span></label>
-        <a hlmBtn variant="link" routerLink="../reset-password" [relativeTo]="route" [queryParams]="{
+        <label hlmFieldLabel for="password"
+          ><span i18n="password field label">Password</span>
+          <span class="text-red-500">*</span></label
+        >
+        <a
+          hlmBtn
+          variant="link"
+          routerLink="../reset-password"
+          [relativeTo]="route"
+          [queryParams]="{
           forgot: true
-        }" i18n>Forgot password</a>
+        }"
+          i18n
+          >Forgot password</a
+        >
       </div>
-      <dm-password-input id="password" [formField]="formModel.password" autocomplete="current-password" />
-      <ng-container [ngTemplateOutlet]="errors" [ngTemplateOutletContext]="{ $implicit: formModel.password }" />
+      <dm-password-input
+        id="password"
+        [formField]="formModel.password"
+        autocomplete="current-password"
+      />
+      <ng-container
+        [ngTemplateOutlet]="errors"
+        [ngTemplateOutletContext]="{ $implicit: formModel.password }"
+      />
     </div>
     <div hlmField>
-      <button type="submit" hlmBtn class="flex w-full" [disabled]="formModel().submitting() || formModel().invalid()">
+      <button
+        type="submit"
+        hlmBtn
+        class="flex w-full"
+        [disabled]="formModel().submitting() || formModel().invalid()"
+      >
         @if (formModel().submitting()) {
         <hlm-spinner icon="lucideLoader" />
         } @else {
@@ -39,7 +65,9 @@
     </div>
     <div hlmField orientation="horizontal">
       <hlm-checkbox id="field-preview-billing-address" [formField]="formModel.staySignedIn" />
-      <label hlmFieldLabel for="field-preview-billing-address" i18n>Stay signed in</label>
+      <label class="cursor-pointer" hlmFieldLabel for="field-preview-billing-address" i18n
+        >Stay signed in</label
+      >
     </div>
     @if(authMethods.length > 0) {
     <hlm-field-separator />
@@ -61,9 +89,8 @@
   <div class="flex items-center gap-x-2 text-sm text-sky-400">
     <hlm-spinner /> <span i18n>Checking...</span>
   </div>
-  } @else if (control().invalid() && control().touched()) {
-  @for (error of control().errors(); track error) {
+  } @else if (control().invalid() && control().touched()) { @for (error of control().errors(); track
+  error) {
   <hlm-field-error [validator]="error.kind">{{ error.message }}</hlm-field-error>
-  }
-  }
+  } }
 </ng-template>

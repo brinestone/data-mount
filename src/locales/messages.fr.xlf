@@ -250,6 +250,20 @@
         </context-group>
         <target>Commencer</target>
       </trans-unit>
+      <trans-unit id="4930506384627295710" datatype="html">
+        <source>Settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
+          <context context-type="linenumber">34,35</context>
+        </context-group>
+      <target>Paramètres</target></trans-unit>
+      <trans-unit id="2949848596707725099" datatype="html">
+        <source>Sign out</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
+          <context context-type="linenumber">38,39</context>
+        </context-group>
+      <target>se déconnecter</target></trans-unit>
     </body>
   </file>
 </xliff>

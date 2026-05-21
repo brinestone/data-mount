@@ -10,7 +10,7 @@ command = "pnpm run build --configuration staging"
 
 [[redirects]]
 from = "/img/*"
-to = "/:language/img/:splat"
+to = "/en/img/:splat"
 status = 200
 
 # 1. German preference

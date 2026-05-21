@@ -25,10 +25,10 @@ import {
 } from 'rxjs';
 
 import {
-  AnonymousTypeOfboolean
+  HealthResponseDto
 } from '../../../../libs/sdk/models';
 import type {
-  AnonymousTypeOfbooleanOutput
+  HealthResponseDtoOutput
 } from '../../../../libs/sdk/models';
 
 import {
@@ -87,35 +87,35 @@ export class HealthService {
  * Health checking endpoint
  * @summary Check health
  */
- checkHealth( options?: HttpClientBodyOptions): Observable<AnonymousTypeOfbooleanOutput>;
- checkHealth( options?: HttpClientEventOptions): Observable<HttpEvent<AnonymousTypeOfbooleanOutput>>;
- checkHealth( options?: HttpClientResponseOptions): Observable<AngularHttpResponse<AnonymousTypeOfbooleanOutput>>;
+ checkHealth( options?: HttpClientBodyOptions): Observable<HealthResponseDtoOutput>;
+ checkHealth( options?: HttpClientEventOptions): Observable<HttpEvent<HealthResponseDtoOutput>>;
+ checkHealth( options?: HttpClientResponseOptions): Observable<AngularHttpResponse<HealthResponseDtoOutput>>;
   checkHealth(
-     options?: HttpClientObserveOptions): Observable<AnonymousTypeOfbooleanOutput | HttpEvent<AnonymousTypeOfbooleanOutput> | AngularHttpResponse<AnonymousTypeOfbooleanOutput>> {
+     options?: HttpClientObserveOptions): Observable<HealthResponseDtoOutput | HttpEvent<HealthResponseDtoOutput> | AngularHttpResponse<HealthResponseDtoOutput>> {
     if (options?.observe === 'events') {
-      return this.http.get<AnonymousTypeOfbooleanOutput>(
+      return this.http.get<HealthResponseDtoOutput>(
       `/api/health`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'events',
       }
-    ).pipe(map(event => event instanceof AngularHttpResponse ? event.clone({ body: AnonymousTypeOfboolean.parse(event.body) }) : event));
+    ).pipe(map(event => event instanceof AngularHttpResponse ? event.clone({ body: HealthResponseDto.parse(event.body) }) : event));
     }
 
     if (options?.observe === 'response') {
-      return this.http.get<AnonymousTypeOfbooleanOutput>(
+      return this.http.get<HealthResponseDtoOutput>(
       `/api/health`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'response',
       }
-    ).pipe(map(response => response.clone({ body: AnonymousTypeOfboolean.parse(response.body) })));
+    ).pipe(map(response => response.clone({ body: HealthResponseDto.parse(response.body) })));
     }
 
-    return this.http.get<AnonymousTypeOfbooleanOutput>(
+    return this.http.get<HealthResponseDtoOutput>(
       `/api/health`,{
         ...(options as Omit<NonNullable<typeof options>, 'observe'>),
         observe: 'body',
       }
-    ).pipe(map(data => AnonymousTypeOfboolean.parse(data)));
+    ).pipe(map(data => HealthResponseDto.parse(data)));
   }
 };
 
