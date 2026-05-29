@@ -1,7 +1,7 @@
 import { email, minLength, required, SchemaPathTree, validate } from '@angular/forms/signals';
 import { messages } from '@app/messages';
-import { Strict } from "@app/types";
-import { EmailSignUpRequest } from "@civilio/sdk/models";
+import { EmailSignUpRequest } from "@datamount/sdk/models";
+import { Strict } from '~/types';
 
 export function defaultSignUpFormData(): Strict<EmailSignUpRequest> {
 	return {

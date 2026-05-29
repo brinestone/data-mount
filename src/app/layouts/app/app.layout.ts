@@ -1,33 +1,42 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Component, computed, inject, OnInit } from '@angular/core';
+import { rxResource, takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Banner } from '@app/components/banner/banner';
 import { ThemeService } from '@app/features/themeing/theme.service';
-import { AuthService } from '@civilio/sdk/services/auth/auth.service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideChevronUp, lucideLogOut, lucideSettings } from '@ng-icons/lucide';
-import { select } from '@ngxs/store';
+import { lucideCheck, lucideChevronDown, lucideChevronUp, lucideLogOut, lucidePlus, lucideSettings } from '@ng-icons/lucide';
+import { Actions, dispatch, select } from '@ngxs/store';
 import { HlmAvatar, HlmAvatarFallback, HlmAvatarImage } from '@spartan-ng/helm/avatar';
 import {
 	HlmDropdownMenu,
 	HlmDropdownMenuItem,
-	HlmDropdownMenuTrigger,
+	HlmDropdownMenuTrigger
 } from '@spartan-ng/helm/dropdown-menu';
 import { HlmSidebarImports } from '@spartan-ng/helm/sidebar';
-import { principal } from '~/app/stores/selectors';
+import { HlmSkeleton } from '@spartan-ng/helm/skeleton';
+import { forkJoin } from 'rxjs';
+import { LoadPrincipal, LoadSession, SelectOrganization, SignOut } from '~/app/stores/auth/actions';
+import { activeOrganization, principal } from '~/app/stores/selectors';
+import { OrganizationService } from '~/sdk/services/organization/organization.service';
+import { ProjectService } from '~/sdk/services/project/project.service';
+import { ofActionInProgress } from '~/utils';
 
 @Component({
-	selector: 'dm-root',
+	selector: 'dm-root-layout',
 	viewProviders: [
 		provideIcons({
-			lucideChevronUp,
-			lucideSettings,
+			lucidePlus,
+			lucideCheck,
 			lucideLogOut,
+			lucideChevronUp,
+			lucideChevronDown,
+			lucideSettings,
 		}),
 	],
 	imports: [
 		HlmSidebarImports,
 		HlmAvatar,
+		HlmSkeleton,
 		HlmAvatarImage,
 		HlmAvatarFallback,
 		HlmDropdownMenuTrigger,
@@ -41,19 +50,67 @@ import { principal } from '~/app/stores/selectors';
 	templateUrl: './app.layout.html',
 	styleUrl: './app.layout.scss',
 })
-export class AppLayout {
+export class AppLayout implements OnInit {
 	private readonly router = inject(Router);
+	private readonly signOutAction = dispatch(SignOut);
+	private readonly loadPrincipal = dispatch(LoadPrincipal);
+	private readonly loadSession = dispatch(LoadSession);
+	private readonly selectOrganization = dispatch(SelectOrganization);
+
+	private readonly projectService = inject(ProjectService);
+	private readonly orgService = inject(OrganizationService);
+	private readonly actions$ = inject(Actions);
 	protected readonly principal = select(principal);
-	private readonly authService = inject(AuthService);
+	protected readonly currentOrg = select(activeOrganization);
 	protected readonly theme = inject(ThemeService).themeSignal;
+	protected readonly orgs = rxResource({
+		stream: () => {
+			return this.orgService.lookupMemberedOrganizations();
+		},
+		defaultValue: []
+	});
+	protected readonly projects = rxResource({
+		stream: () => {
+			return this.projectService.lookupProjects();
+		},
+		defaultValue: []
+	});
+	protected readonly selectedOrg = computed(() => {
+		const id = this.currentOrg();
+		return this.orgs.value().find(o => o.id === id);
+	});
+	protected readonly fetchingPrincipal = toSignal(this.actions$.pipe(
+		takeUntilDestroyed(),
+		ofActionInProgress(LoadPrincipal),
+	), { initialValue: true });
+
+	ngOnInit() {
+		forkJoin([
+			this.loadPrincipal(),
+			this.loadSession(),
+		]).subscribe();
+	}
+
+	protected onAddProjectButtonClicked() {
+
+	}
 
 	protected onSignOutButtonClicked() {
-		this.authService.signOut().subscribe({
-			complete: () => {
-				localStorage.clear();
-				sessionStorage.clear();
-				this.router.navigate(['/app']);
+		this.signOutAction().subscribe({
+			error: e => {
+				console.error(e);
 			},
+			complete: () => {
+				this.router.navigate(['/app'], { replaceUrl: true, skipLocationChange: true, onSameUrlNavigation: 'reload' });
+			}
 		});
+	}
+
+	protected onSelectOrganizationButtonClicked(id: string) {
+		const isCurrent = this.currentOrg() === id;
+		if (isCurrent) return;
+		this.selectOrganization(id).subscribe({
+			error: (e: Error) => console.error(e), // TODO: show a toast to the user
+		})
 	}
 }

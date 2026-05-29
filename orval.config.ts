@@ -1,6 +1,6 @@
 import { defineConfig } from 'orval';
 export default defineConfig({
-	civilio: {
+	datamount: {
 		input: {
 			target: 'http://localhost:5144/openapi/v1.json',
 			filters: {
@@ -18,7 +18,7 @@ export default defineConfig({
 				// zod: {},
 				angular: {
 					provideIn: false,
-					runtimeValidation: true
+					runtimeValidation: true,
 				},
 			},
 			schemas: {

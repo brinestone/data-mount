@@ -3,11 +3,12 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
 import { form, FormField, FormRoot, ValidationError } from "@angular/forms/signals";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
-import { EmailSignUpValidationErrors, RemoteValidationErrors } from "@app/types";
-import { AuthService } from "@civilio/sdk/services/auth/auth.service";
+import { PasswordInput } from "@app/components";
+import { messages } from "@app/messages";
+import { AuthService } from "@datamount/sdk/services/auth/auth.service";
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lobeGoogleColor } from '@ng-icons/lobe-icons/color';
-import { lucideAlertCircle, lucideDot, lucideEye, lucideEyeOff, lucideInfo, lucideLoader } from "@ng-icons/lucide";
+import { lucideAlertCircle, lucideDot, lucideEye, lucideEyeOff, lucideLoader } from "@ng-icons/lucide";
 import { HlmAlertImports } from '@spartan-ng/helm/alert';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmFieldImports } from '@spartan-ng/helm/field';
@@ -15,9 +16,8 @@ import { HlmInput } from '@spartan-ng/helm/input';
 import { HlmInputGroupImports } from '@spartan-ng/helm/input-group';
 import { HlmSpinner } from '@spartan-ng/helm/spinner';
 import { lastValueFrom } from "rxjs";
+import { EmailSignUpValidationErrors } from "~/types";
 import { configureSignUpForm, defaultSignUpFormData } from "./form-config";
-import { PasswordInput } from "@app/components";
-import { messages } from "@app/messages";
 
 @Component({
 	selector: 'dm-sign-up-page',

@@ -2,26 +2,95 @@
   <hlm-sidebar>
     <div hlmSidebarHeader>
       <dm-banner />
+      <ul hlmSidebarMenu>
+        <li hlmSidebarMenuItem>
+          @defer (when !orgs.isLoading()) {
+            <button hlmSidebarMenuButton [hlmDropdownMenuTrigger]="orgsMenu">
+              @if (selectedOrg()?.icon; as icon) {
+                <hlm-avatar size="sm">
+                  <img hlmAvatarImage [src]="icon" />
+                </hlm-avatar>
+              }
+              <span>
+                @if (selectedOrg()) {
+                  {{ selectedOrg()?.name }}
+                } @else {
+                  <ng-container i18n> Select Organization </ng-container>
+                }
+              </span>
+              <ng-icon hlm name="lucideChevronDown" class="ml-auto" />
+            </button>
+            <ng-template #orgsMenu>
+              <hlm-dropdown-menu class="w-60">
+                @for (org of orgs.value(); track org.id) {
+                  <button (click)="onSelectOrganizationButtonClicked(org.id)" hlmDropdownMenuItem>
+                    <hlm-avatar>
+                      <img hlmAvatarImage [src]="org.icon" />
+                    </hlm-avatar>
+                    <span>{{ org.name }}</span>
+                    @if (selectedOrg()?.id === org.id) {
+                      <ng-icon name="lucideCheck" class="ml-auto" />
+                    }
+                  </button>
+                }
+              </hlm-dropdown-menu>
+            </ng-template>
+          } @placeholder {
+            <hlm-skeleton class="h-5 rounded-md w-full" />
+          }
+        </li>
+      </ul>
     </div>
-    <div hlmSidebarContent></div>
+    <div hlmSidebarContent>
+      <div hlmSidebarGroup>
+        <p i18n hlmSidebarGroupLabel class="text-sm text-muted-foreground">Projects</p>
+        <button hlmSidebarGroupAction title="Add Project" (click)="onAddProjectButtonClicked()">
+          <ng-icon name="lucidePlus" />
+          <span class="sr-only" i18n>Add Project</span>
+        </button>
+        <div hlmSidebarGroupContent>
+          <ul hlmSidebarMenu>
+            @for (project of projects.value(); track project.id) {
+              <li hlmSidebarMenuItem>
+                <a hlmSidebarMenuButton routerLink="/projects/{{ project.id }}">
+                  <hlm-avatar size="sm">
+                    <img hlmAvatarImage [src]="project.icon" alt="{{ project.name }} icon" />
+                  </hlm-avatar>
+                </a>
+              </li>
+            } @empty {
+              <li hlmSidebarMenuItem class="">
+                <div class="text-center text-muted-foreground text-xs p-3" i18n>
+                  There are no projects available
+                </div>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
     <div hlmSidebarFooter>
       <ul hlmSidebarMenu>
         <li hlmSidebarMenuItem>
-          <button class="py-2" hlmSidebarMenuButton [hlmDropdownMenuTrigger]="menu">
-            <div class="flex items-center gap-2 py-2">
-              <hlm-avatar size="sm">
-                <img
-                  hlmAvatarImage
-                  [src]="principal().photo"
-                  alt="User photo"
-                  i18n-alt="profile photo|User's profile photo"
-                />
-                <span hlmAvatarFallback>{{ principal().initials }}</span>
-              </hlm-avatar>
-              <span class="line-clamp-1 block">{{ principal().fullName }}</span>
-            </div>
-            <ng-icon name="lucideChevronUp" class="ml-auto" />
-          </button>
+          @defer (when !fetchingPrincipal()) {
+            <button class="py-2" hlmSidebarMenuButton [hlmDropdownMenuTrigger]="menu">
+              <div class="flex items-center gap-2 py-2">
+                <hlm-avatar size="sm">
+                  <img
+                    hlmAvatarImage
+                    [src]="principal()?.photo"
+                    alt="User photo"
+                    i18n-alt="profile photo|User's profile photo"
+                  />
+                  <span hlmAvatarFallback>{{ principal()?.initials }}</span>
+                </hlm-avatar>
+                <span class="line-clamp-1 block">{{ principal()?.fullName }}</span>
+              </div>
+              <ng-icon name="lucideChevronUp" class="ml-auto" />
+            </button>
+          } @placeholder {
+            <hlm-skeleton class="h-8 rounded-md w-full" />
+          }
           <ng-template #menu>
             <hlm-dropdown-menu class="w-60">
               <a routerLink="/settings" hlmDropdownMenuItem>

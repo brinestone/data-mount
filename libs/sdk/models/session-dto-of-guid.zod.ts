@@ -7,9 +7,9 @@
 import { z as zod } from 'zod';
 
 export const SessionDtoOfGuid = zod.object({
-  "userAgent": zod.string().nullish(),
   "ip": zod.string().optional(),
   "accountId": zod.uuid().optional(),
+  "activeOrganizationId": zod.uuid().optional(),
   "createdAt": zod.iso.datetime({"offset":true}),
   "updatedAt": zod.iso.datetime({"offset":true}),
   "id": zod.uuid()

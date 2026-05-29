@@ -59,6 +59,10 @@
           <context context-type="sourcefile">src/app/features/auth/layout/auth.layout.ts</context>
           <context context-type="linenumber">37</context>
         </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">18,19</context>
+        </context-group>
         <note priority="1" from="description">landing page</note>
       </trans-unit>
       <trans-unit id="1111438507317738681" datatype="html">
@@ -83,7 +87,7 @@
         <source>Email</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
-          <context context-type="linenumber">15,16</context>
+          <context context-type="linenumber">16</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-up/sign-up.page.html</context>
@@ -95,7 +99,7 @@
         <source>Password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
-          <context context-type="linenumber">22,23</context>
+          <context context-type="linenumber">27,28</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-up/sign-up.page.html</context>
@@ -107,21 +111,21 @@
         <source>Forgot password</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">39,40</context>
         </context-group>
       </trans-unit>
       <trans-unit id="6023420556639522969" datatype="html">
         <source>Stay signed in</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
-          <context context-type="linenumber">42,43</context>
+          <context context-type="linenumber">69,70</context>
         </context-group>
       </trans-unit>
       <trans-unit id="5634046187279178187" datatype="html">
         <source>Continue with <x id="INTERPOLATION" equiv-text="{{ method.label }}"/></source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
-          <context context-type="linenumber">51,52</context>
+          <context context-type="linenumber">79,80</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-up/sign-up.page.html</context>
@@ -132,7 +136,7 @@
         <source>Checking...</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-in/sign-in.page.html</context>
-          <context context-type="linenumber">62,63</context>
+          <context context-type="linenumber">90,91</context>
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/auth/pages/sign-up/sign-up.page.html</context>
@@ -160,18 +164,41 @@
           <context context-type="linenumber">55,56</context>
         </context-group>
       </trans-unit>
+      <trans-unit id="7091571651222742304" datatype="html">
+        <source>Projects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4053112335752964687" datatype="html">
+        <source>Add Project</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6317105497908095716" datatype="html">
+        <source>User photo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">46,47</context>
+        </context-group>
+        <note priority="1" from="description">User&apos;s profile photo</note>
+        <note priority="1" from="meaning">profile photo</note>
+      </trans-unit>
       <trans-unit id="4930506384627295710" datatype="html">
         <source>Settings</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
-          <context context-type="linenumber">34,35</context>
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">59,60</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2949848596707725099" datatype="html">
         <source>Sign out</source>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
-          <context context-type="linenumber">38,39</context>
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">63,64</context>
         </context-group>
       </trans-unit>
       <trans-unit id="1766868512644833211" datatype="html">
@@ -228,22 +255,57 @@
         <source>Next-gen real-time data insights</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
-          <context context-type="linenumber">20,21</context>
+          <context context-type="linenumber">22,24</context>
         </context-group>
         <note priority="1" from="description">site title</note>
       </trans-unit>
-      <trans-unit id="2573443270155118858" datatype="html">
-        <source>Manage your data in real-time from a single place, and view insights across your data with AI</source>
+      <trans-unit id="831978691994425024" datatype="html">
+        <source> Manage your data in real-time from a single place, and view insights across your data with AI </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
-          <context context-type="linenumber">21,23</context>
+          <context context-type="linenumber">25,26</context>
         </context-group>
       </trans-unit>
       <trans-unit id="2045779543869682721" datatype="html">
         <source>Get Started</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
-          <context context-type="linenumber">26,27</context>
+          <context context-type="linenumber">29,30</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2649252321173430744" datatype="html">
+        <source>Not Found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4208013118626550321" datatype="html">
+        <source>The page you are looking for has been moved or does not exist.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4828711596838277091" datatype="html">
+        <source>U</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stores/selectors.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="279347004004333327" datatype="html">
+        <source>Unknown User</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stores/selectors.ts</context>
+          <context context-type="linenumber">10</context>
         </context-group>
       </trans-unit>
     </body>

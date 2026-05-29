@@ -1,3 +1,6 @@
+import { UserDtoOfGuid } from "@datamount/sdk/models";
+import z from "zod";
+
 export type Strict<T> = {
 	[P in keyof T]-?: T[P] extends (infer U)[]
 	? Strict<U>[]
@@ -24,3 +27,17 @@ export type EmailSignInValidationErrors = RemoteValidationErrors<{
 	Email?: string[];
 	Password?: string[];
 }>;
+
+export const Principal = UserDtoOfGuid.pick({
+	initials: true,
+	fullName: true,
+	isBanned: true,
+	isOnboarded: true,
+	banReason: true,
+	photo: true,
+}).extend({
+	fullName: z.string().default($localize`Unknown User`),
+	initials: z.string().default('U'),
+	photo: z.string().nullish().default(null),
+});
+export type Principal = z.infer<typeof Principal>;

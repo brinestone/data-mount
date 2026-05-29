@@ -11,7 +11,7 @@ function Get-Translation
 {
   param([string]$Text, [string]$TargetLocale)
   if ([string]::IsNullOrWhiteSpace($Text))
-  { return "" 
+  { return ""
   }
 
   $cleanText = [uri]::EscapeDataString($Text)
@@ -31,10 +31,10 @@ function Out-Truncated
 {
   param([string]$Text, [int]$Length = 10)
   if ([string]::IsNullOrWhiteSpace($Text))
-  { return $Text 
+  { return $Text
   }
   if ($Text.Length -le $Length)
-  { return $Text 
+  { return $Text
   }
   return ($Text.Substring(0, $Length).Trim() + "...")
 }
@@ -63,7 +63,7 @@ function Update-TranslationsFromBase
   {
     $id = $baseUnit.GetAttribute("id")
     if ([string]::IsNullOrWhiteSpace($id))
-    { continue 
+    { continue
     }
 
     $xpath = "//x:trans-unit[@id='$id']"
@@ -91,7 +91,7 @@ function Update-TranslationsFromBase
         $localeSource.InnerText = $baseSource
         $target = (Select-Xml -Xml $localeUnit -XPath "x:target" -Namespace $ns).Node
         if ($null -ne $target)
-        { $target.InnerText = "" 
+        { $target.InnerText = ""
         }
       }
     }
@@ -119,7 +119,7 @@ function Update-TranslationsFromBase
   # Cleanup obsolete IDs
   $baseIds = @{}
   foreach ($bu in $BaseUnits)
-  { $baseIds[$bu.GetAttribute("id")] = $true 
+  { $baseIds[$bu.GetAttribute("id")] = $true
   }
 
   $localeUnits = Select-Xml -Xml $localeDoc -XPath "//x:trans-unit" -Namespace $ns | Select-Object -ExpandProperty Node

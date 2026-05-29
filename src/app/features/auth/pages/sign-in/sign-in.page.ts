@@ -4,8 +4,8 @@ import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/cor
 import { form, FormField, FormRoot, ValidationError } from "@angular/forms/signals";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { PasswordInput } from "@app/components";
-import { EmailSignInValidationErrors } from "@app/types";
-import { AuthService } from "@civilio/sdk/services/auth/auth.service";
+import { messages } from "@app/messages";
+import { AuthService } from "@datamount/sdk/services/auth/auth.service";
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lobeGoogleColor } from "@ng-icons/lobe-icons/color";
 import { lucideAlertCircle, lucideLoader } from "@ng-icons/lucide";
@@ -16,8 +16,8 @@ import { HlmField, HlmFieldDescription, HlmFieldError, HlmFieldLabel, HlmFieldSe
 import { HlmInput } from "@spartan-ng/helm/input";
 import { HlmSpinner } from "@spartan-ng/helm/spinner";
 import { lastValueFrom } from "rxjs";
+import { EmailSignInValidationErrors } from "~/types";
 import { defaultSignInData, loginFormSchema } from "./form-config";
-import { messages } from "@app/messages";
 
 @Component({
 	selector: 'dm-sign-in-page',

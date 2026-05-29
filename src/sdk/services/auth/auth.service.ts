@@ -33,6 +33,7 @@ import type {
   EmailSignUpParams,
   EmailSignUpRequest,
   GetAntiforgeryTokenParams,
+  GetSessionParams,
   SessionDtoOfGuidOutput,
   SignOutParams
 } from '../../../../libs/sdk/models';
@@ -136,6 +137,41 @@ function filterParams(
 @Injectable()
 export class AuthService {
   private readonly http = inject(HttpClient);
+/**
+ * @summary Get current user's session
+ */
+ getSession(params?: GetSessionParams, options?: HttpClientBodyOptions): Observable<SessionDtoOfGuidOutput>;
+ getSession(params?: GetSessionParams, options?: HttpClientEventOptions): Observable<HttpEvent<SessionDtoOfGuidOutput>>;
+ getSession(params?: GetSessionParams, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<SessionDtoOfGuidOutput>>;
+  getSession(
+    params?: GetSessionParams, options?: HttpClientObserveOptions): Observable<SessionDtoOfGuidOutput | HttpEvent<SessionDtoOfGuidOutput> | AngularHttpResponse<SessionDtoOfGuidOutput>> {
+    const filteredParams = filterParams({...params, ...options?.params}, new Set<string>([]));
+
+    if (options?.observe === 'events') {
+      return this.http.get<SessionDtoOfGuidOutput>(
+      `/api/auth/session`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'events',
+        params: filteredParams,}
+    ).pipe(map(event => event instanceof AngularHttpResponse ? event.clone({ body: SessionDtoOfGuid.parse(event.body) }) : event));
+    }
+
+    if (options?.observe === 'response') {
+      return this.http.get<SessionDtoOfGuidOutput>(
+      `/api/auth/session`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'response',
+        params: filteredParams,}
+    ).pipe(map(response => response.clone({ body: SessionDtoOfGuid.parse(response.body) })));
+    }
+
+    return this.http.get<SessionDtoOfGuidOutput>(
+      `/api/auth/session`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+        params: filteredParams,}
+    ).pipe(map(data => SessionDtoOfGuid.parse(data)));
+  }
 /**
  * @summary Sign out
  */
@@ -295,6 +331,7 @@ export class AuthService {
   }
 };
 
+export type GetSessionClientResult = NonNullable<SessionDtoOfGuidOutput>
 export type SignOutClientResult = NonNullable<void>
 export type GetAntiforgeryTokenClientResult = NonNullable<void>
 export type EmailSignInClientResult = NonNullable<SessionDtoOfGuidOutput>

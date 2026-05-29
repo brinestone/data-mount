@@ -6,7 +6,7 @@ import { provideStore } from '@ngxs/store';
 import { apiInterceptor } from './interceptors/api-interceptor';
 import { rootRoutes } from './root.routes';
 import { AuthStore } from './stores/auth/auth.store';
-import { provideUsers } from '~/sdk/providers';
+import { provideAuth, provideUsers } from '~/sdk/providers';
 
 // const loaders = !isDevMode() ? provideNetlifyLoader() : [];
 
@@ -18,6 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(
       [AuthStore],
       provideUsers(),
+			provideAuth(),
       withNgxsLoggerPlugin({
         disabled: !isDevMode(),
       }),

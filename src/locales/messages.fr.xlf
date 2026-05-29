@@ -234,14 +234,6 @@
         <note priority="1" from="description">site title</note>
         <target>Informations sur les données en temps réel de nouvelle génération</target>
       </trans-unit>
-      <trans-unit id="2573443270155118858" datatype="html">
-        <source>Manage your data in real-time from a single place, and view insights across your data with AI</source>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
-          <context context-type="linenumber">21,23</context>
-        </context-group>
-        <target>Gérez vos données en temps réel à partir d'un seul endroit et affichez des informations sur vos données grâce à l'IA.</target>
-      </trans-unit>
       <trans-unit id="2045779543869682721" datatype="html">
         <source>Get Started</source>
         <context-group purpose="location">
@@ -256,14 +248,90 @@
           <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
           <context context-type="linenumber">34,35</context>
         </context-group>
-      <target>Paramètres</target></trans-unit>
+        <target>Paramètres</target>
+      </trans-unit>
       <trans-unit id="2949848596707725099" datatype="html">
         <source>Sign out</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/layouts/root/root.layout.html</context>
           <context context-type="linenumber">38,39</context>
         </context-group>
-      <target>se déconnecter</target></trans-unit>
+        <target>se déconnecter</target>
+      </trans-unit>
+      <trans-unit id="6317105497908095716" datatype="html">
+        <source>User photo</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">16,17</context>
+        </context-group>
+        <note priority="1" from="description">User's profile photo</note>
+        <note priority="1" from="meaning">profile photo</note>
+        <target>Photo de l'utilisateur</target>
+      </trans-unit>
+      <trans-unit id="831978691994425024" datatype="html">
+        <source> Manage your data in real-time from a single place, and view insights across your data with AI </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/landing/landing.page.html</context>
+          <context context-type="linenumber">25,26</context>
+        </context-group>
+        <target>Gérez vos données en temps réel à partir d'un seul endroit et affichez des informations sur vos données grâce à l'IA.</target>
+      </trans-unit>
+      <trans-unit id="2649252321173430744" datatype="html">
+        <source>Not Found</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">7,8</context>
+        </context-group>
+        <target>Introuvable</target>
+      </trans-unit>
+      <trans-unit id="4208013118626550321" datatype="html">
+        <source>The page you are looking for has been moved or does not exist.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <target>La page que vous recherchez a été déplacée ou n'existe pas.</target>
+      </trans-unit>
+      <trans-unit id="734934965373819800" datatype="html">
+        <source>Go back</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/pages/not-found/not-found.page.html</context>
+          <context context-type="linenumber">14,15</context>
+        </context-group>
+        <target>Retourner</target>
+      </trans-unit>
+      <trans-unit id="7091571651222742304" datatype="html">
+        <source>Projects</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">8,9</context>
+        </context-group>
+        <target />
+      </trans-unit>
+      <trans-unit id="4053112335752964687" datatype="html">
+        <source>Add Project</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/layouts/app/app.layout.html</context>
+          <context context-type="linenumber">11,12</context>
+        </context-group>
+        <target>Ajouter un projet</target>
+      </trans-unit>
+      <trans-unit id="279347004004333327" datatype="html">
+        <source>Unknown User</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stores/selectors.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <target>Utilisateur inconnu</target>
+      </trans-unit>
+      <trans-unit id="4828711596838277091" datatype="html">
+        <source>U</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/stores/selectors.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+        <target>U</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
