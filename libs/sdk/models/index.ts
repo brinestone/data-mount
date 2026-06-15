@@ -7,6 +7,7 @@
 
 export * from './activate-organization-headers.zod';
 export * from './activate-organization-params.zod';
+export * from './availability-response.zod';
 export * from './contact-dto-of-guid.zod';
 export * from './email-sign-in-body.zod';
 export * from './email-sign-in-headers.zod';
@@ -24,6 +25,8 @@ export * from './get-me-params.zod';
 export * from './get-session-headers.zod';
 export * from './get-session-params.zod';
 export * from './health-response-dto.zod';
+export * from './is-name-available-headers.zod';
+export * from './is-name-available-params.zod';
 export * from './lookup-membered-organizations-headers.zod';
 export * from './lookup-membered-organizations-params.zod';
 export * from './lookup-projects-headers.zod';

@@ -25,11 +25,18 @@ import {
 } from 'rxjs';
 
 import {
+  AvailabilityResponse,
   ProjectLookupOfGuid
 } from '../../../../libs/sdk/models';
 import type {
+  AvailabilityResponseOutput,
+  IsNameAvailableParams,
   LookupProjectsParams
 } from '../../../../libs/sdk/models';
+
+import {
+  map
+} from 'rxjs';
 
 
 
@@ -126,6 +133,42 @@ function filterParams(
 @Injectable()
 export class ProjectService {
   private readonly http = inject(HttpClient);
+/**
+ * Check whether a project name is available or not
+ * @summary Check name availability
+ */
+ isNameAvailable(params?: IsNameAvailableParams, options?: HttpClientBodyOptions): Observable<AvailabilityResponseOutput>;
+ isNameAvailable(params?: IsNameAvailableParams, options?: HttpClientEventOptions): Observable<HttpEvent<AvailabilityResponseOutput>>;
+ isNameAvailable(params?: IsNameAvailableParams, options?: HttpClientResponseOptions): Observable<AngularHttpResponse<AvailabilityResponseOutput>>;
+  isNameAvailable(
+    params?: IsNameAvailableParams, options?: HttpClientObserveOptions): Observable<AvailabilityResponseOutput | HttpEvent<AvailabilityResponseOutput> | AngularHttpResponse<AvailabilityResponseOutput>> {
+    const filteredParams = filterParams({...params, ...options?.params}, new Set<string>([]));
+
+    if (options?.observe === 'events') {
+      return this.http.get<AvailabilityResponseOutput>(
+      `/api/projects/name-available`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'events',
+        params: filteredParams,}
+    ).pipe(map(event => event instanceof AngularHttpResponse ? event.clone({ body: AvailabilityResponse.parse(event.body) }) : event));
+    }
+
+    if (options?.observe === 'response') {
+      return this.http.get<AvailabilityResponseOutput>(
+      `/api/projects/name-available`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'response',
+        params: filteredParams,}
+    ).pipe(map(response => response.clone({ body: AvailabilityResponse.parse(response.body) })));
+    }
+
+    return this.http.get<AvailabilityResponseOutput>(
+      `/api/projects/name-available`,{
+    ...(options as Omit<NonNullable<typeof options>, 'observe'>),
+        observe: 'body',
+        params: filteredParams,}
+    ).pipe(map(data => AvailabilityResponse.parse(data)));
+  }
 /**
  * Gets the projects the current user can access
  * @summary Lookup Projects

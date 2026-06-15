@@ -3,10 +3,13 @@ import { catchError, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
 import { inject } from "@angular/core";
 import { Router } from "@angular/router";
+import { Store } from "@ngxs/store";
+import { SignOut } from "../stores/auth/actions";
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 	if (req.url.startsWith("/api")) {
-		const router = inject(Router);
+		// const router = inject(Router);
+		const store = inject(Store);
 		const newUrl = new URL(req.urlWithParams, environment.apiBase);
 		const clonedRequest = req.clone({
 			setHeaders: {
@@ -16,9 +19,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 		return next(clonedRequest).pipe(
 			catchError((e: HttpErrorResponse) => {
 				if (e.status == 401) {
-					localStorage.clear();
-					sessionStorage.clear();
-					router.navigate([], { onSameUrlNavigation: 'reload' })
+					store.dispatch(new SignOut());
 				}
 				return throwError(() => e);
 			})

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { rxResource, takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Banner } from '@app/components/banner/banner';
@@ -21,6 +21,12 @@ import { OrganizationService } from '~/sdk/services/organization/organization.se
 import { ProjectService } from '~/sdk/services/project/project.service';
 import { ofActionInProgress } from '~/utils';
 
+import { HlmDialogImports } from '@spartan-ng/helm/dialog';
+import { BrnDialogState } from '@spartan-ng/brain/dialog';
+import { HlmButton } from '@spartan-ng/helm/button';
+import { NewProjectForm } from '~/app/components/forms';
+
+
 @Component({
 	selector: 'dm-root-layout',
 	viewProviders: [
@@ -34,15 +40,18 @@ import { ofActionInProgress } from '~/utils';
 		}),
 	],
 	imports: [
+		HlmDialogImports,
 		HlmSidebarImports,
 		HlmAvatar,
 		HlmSkeleton,
 		HlmAvatarImage,
+		HlmButton,
 		HlmAvatarFallback,
 		HlmDropdownMenuTrigger,
 		HlmDropdownMenu,
 		HlmDropdownMenuItem,
 		RouterOutlet,
+		NewProjectForm,
 		Banner,
 		NgIcon,
 		RouterLink,
@@ -51,15 +60,16 @@ import { ofActionInProgress } from '~/utils';
 	styleUrl: './app.layout.scss',
 })
 export class AppLayout implements OnInit {
-	private readonly router = inject(Router);
 	private readonly signOutAction = dispatch(SignOut);
 	private readonly loadPrincipal = dispatch(LoadPrincipal);
 	private readonly loadSession = dispatch(LoadSession);
 	private readonly selectOrganization = dispatch(SelectOrganization);
-
+	private readonly router = inject(Router);
 	private readonly projectService = inject(ProjectService);
 	private readonly orgService = inject(OrganizationService);
 	private readonly actions$ = inject(Actions);
+
+	protected readonly newProjectDialogState = signal<BrnDialogState>('open');
 	protected readonly principal = select(principal);
 	protected readonly currentOrg = select(activeOrganization);
 	protected readonly theme = inject(ThemeService).themeSignal;
@@ -92,7 +102,7 @@ export class AppLayout implements OnInit {
 	}
 
 	protected onAddProjectButtonClicked() {
-
+		this.newProjectDialogState.set('open');
 	}
 
 	protected onSignOutButtonClicked() {

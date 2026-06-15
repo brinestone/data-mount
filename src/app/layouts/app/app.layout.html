@@ -44,10 +44,8 @@
     <div hlmSidebarContent>
       <div hlmSidebarGroup>
         <p i18n hlmSidebarGroupLabel class="text-sm text-muted-foreground">Projects</p>
-        <button hlmSidebarGroupAction title="Add Project" (click)="onAddProjectButtonClicked()">
-          <ng-icon name="lucidePlus" />
-          <span class="sr-only" i18n>Add Project</span>
-        </button>
+        <!-- @if(){} -->
+
         <div hlmSidebarGroupContent>
           <ul hlmSidebarMenu>
             @for (project of projects.value(); track project.id) {
@@ -114,3 +112,17 @@
     <router-outlet />
   </main>
 </div>
+
+<hlm-dialog>
+  <button hlmDialogTrigger hlmBtn variant="outline">Open Dialog</button>
+  <hlm-dialog-content *hlmDialogPortal="let ctx">
+    <hlm-dialog-header>
+      <h3 hlmDialogTitle>Edit profile</h3>
+      <p hlmDialogDescription>Make changes to your profile here. Click save when you're done.</p>
+    </hlm-dialog-header>
+    <hlm-dialog-footer>
+      <button hlmBtn variant="outline" hlmDialogClose>Cancel</button>
+      <button hlmBtn type="submit">Save changes</button>
+    </hlm-dialog-footer>
+  </hlm-dialog-content>
+</hlm-dialog>

@@ -4,5 +4,6 @@ export const messages = {
 	unknownError: $localize`:unkonwn error|An action failed with an unknown cause:An unknown error occurred`,
 	passwordMinLength: (length: 8) => $localize`:password minimum length|The minimum length of a password:Password must be at least ${length} characters long`,
 	passwordMismatch: $localize`Passwords do not match`,
-	serverUnreachable: $localize`Could not reach the server. Please try again`
+	serverUnreachable: $localize`Could not reach the server. Please try again`,
+	nameTaken: $localize`This name is already taken`,
 } as const;
