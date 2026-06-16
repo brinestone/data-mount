@@ -12,6 +12,10 @@ export class SignOut {
 	static readonly type = `${prefix} Sign Out`;
 }
 
+export class SignedOut{
+	static readonly type = `${prefix} signed out`
+}
+
 export class SelectOrganization {
 	static readonly type = `${prefix} Select Organization`;
 	constructor(public readonly id: string) { }

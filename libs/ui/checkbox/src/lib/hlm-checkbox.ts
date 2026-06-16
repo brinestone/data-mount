@@ -94,7 +94,7 @@ export class HlmCheckbox implements ControlValueAccessor {
 	public readonly checked = model<boolean>(false);
 
 	/** Emits when checked state changes. */
-	public readonly checkedChange = output<boolean>();
+	// public readonly checkedChange = output<boolean>();
 
 	/**
 	 * The indeterminate state of the checkbox.
@@ -135,7 +135,7 @@ export class HlmCheckbox implements ControlValueAccessor {
 	protected _handleChange(value: boolean): void {
 		if (this._disabled()) return;
 		this.checked.set(value);
-		this.checkedChange.emit(value);
+		// this.checkedChange.emit(value);
 		this._onChange?.(value);
 	}
 

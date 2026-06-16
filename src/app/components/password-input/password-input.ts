@@ -1,4 +1,4 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, ElementRef, input, linkedSignal, model, numberAttribute, signal, viewChild } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, input, model, numberAttribute, signal, viewChild } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { NgIcon, provideIcons } from "@ng-icons/core";
 import { lucideEye, lucideEyeOff } from '@ng-icons/lucide';
@@ -48,6 +48,13 @@ import { HlmInputGroup, HlmInputGroupAddon, HlmInputGroupButton, HlmInputGroupIn
 			</div>
 		}
 	`,
+	// host: {
+	// 	'[attr.hidden]': 'hidden()',
+	// 	'[class.ng-dirty]': 'dirty()',
+	// 	'[class.ng-touched]': 'touched()',
+	// 	'[class.ng-hidden]': 'hidden()',
+	// 	'[class.ng-invalid]': 'hidden()',
+	// },
 	hostDirectives: [
 		HlmInputGroup
 	],
@@ -71,14 +78,14 @@ export class PasswordInput implements FormValueControl<string | undefined> {
 	readonly required = input<boolean, unknown>(false, { transform: booleanAttribute });
 	readonly minLength = input<number | undefined, unknown>(undefined, { transform: numberAttribute });
 	readonly maxLength = input<number | undefined, unknown>(undefined, { transform: numberAttribute });
-	protected readonly _maxLength = linkedSignal(() => {
+	protected readonly _maxLength = computed(() => {
 		const min = this.minLength();
 		const max = this.maxLength();
 		if (min === undefined) return max;
 		else if (max === undefined) return Number.POSITIVE_INFINITY;
 		else return undefined;
 	});
-	protected readonly _minLength = linkedSignal(() => {
+	protected readonly _minLength = computed(() => {
 		const min = this.minLength();
 		const max = this.maxLength();
 		if (max === undefined) return min;

@@ -1,6 +1,6 @@
 import { NgTemplateOutlet } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { ChangeDetectionStrategy, Component, inject, signal } from "@angular/core";
+import { ChangeDetectionStrategy, Component, effect, inject, signal } from "@angular/core";
 import { form, FormField, FormRoot, ValidationError } from "@angular/forms/signals";
 import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { PasswordInput } from "@app/components";
@@ -108,5 +108,11 @@ export class SignInPage {
 
 	private googleSignInHandler() {
 
+	}
+	constructor() {
+		effect(() => {
+			const data = this.formData();
+			console.log(data);
+		})
 	}
 }

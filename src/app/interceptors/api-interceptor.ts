@@ -1,10 +1,9 @@
 import { HttpErrorResponse, HttpInterceptorFn } from "@angular/common/http";
+import { inject } from "@angular/core";
+import { Store } from "@ngxs/store";
 import { catchError, throwError } from "rxjs";
 import { environment } from "../../environments/environment";
-import { inject } from "@angular/core";
-import { Router } from "@angular/router";
-import { Store } from "@ngxs/store";
-import { SignOut } from "../stores/auth/actions";
+import { SignedOut } from "../stores/auth/actions";
 
 export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 	if (req.url.startsWith("/api")) {
@@ -19,7 +18,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 		return next(clonedRequest).pipe(
 			catchError((e: HttpErrorResponse) => {
 				if (e.status == 401) {
-					store.dispatch(new SignOut());
+					store.dispatch(new SignedOut());
 				}
 				return throwError(() => e);
 			})

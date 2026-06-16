@@ -8,7 +8,7 @@ import { AuthService } from '~/sdk/services/auth/auth.service';
 import { OrganizationService } from '~/sdk/services/organization/organization.service';
 import { UserService } from '~/sdk/services/user/user.service';
 import { Principal } from '~/types';
-import { LoadPrincipal, LoadSession, SelectOrganization, SignOut } from './actions';
+import { LoadPrincipal, LoadSession, SelectOrganization, SignedOut, SignOut } from './actions';
 
 export type AuthStoreModel = {
 	principal?: Principal;
@@ -30,6 +30,13 @@ export class AuthStore {
 	private readonly authService = inject(AuthService);
 	private readonly orgService = inject(OrganizationService);
 
+	@Action(SignedOut)
+	onSignedOut(ctx: Context) {
+		ctx.setState({ principal: Principal.parse({}) });
+		localStorage.removeItem('session');
+		sessionStorage.removeItem('session');
+	}
+
 	@Action(SelectOrganization, { cancelUncompleted: true })
 	onSelectOrganization(ctx: Context, { id }: SelectOrganization) {
 		return this.orgService.activateOrganization(id).pipe(
@@ -48,9 +55,7 @@ export class AuthStore {
 	onSignOut(ctx: Context) {
 		return this.authService.signOut().pipe(
 			tap(() => {
-				ctx.setState({ principal: Principal.parse({}) });
-				localStorage.removeItem('session');
-				sessionStorage.removeItem('session');
+				ctx.dispatch(new SignedOut());
 			})
 		);
 	}
